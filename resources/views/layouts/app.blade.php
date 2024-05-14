@@ -30,12 +30,14 @@
                 <use xlink:href="{{ asset('icons/brand.svg#signet') }}"></use>
             </svg>
         </div>
-        @include('layouts.navigation')
+        @include($name . '.navigation')
+        {{-- @yield('navigation') --}}
         <button class="sidebar-toggler" type="button" data-coreui-toggle="unfoldable"></button>
     </div>
     <div class="wrapper d-flex flex-column min-vh-100 bg-light">
         <!-- Header block -->
         @include('layouts.includes.header')
+
         <!-- / Header block -->
 
         <div class="body flex-grow-1 px-3">

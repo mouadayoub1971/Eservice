@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Auth\ForgotPasswordController;
 use App\Http\Controllers\Auth\LoginController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
@@ -15,9 +16,7 @@ use Illuminate\Support\Facades\Auth;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+
 
 Route::get('/about', function () {
     return view('about');
@@ -26,9 +25,11 @@ Route::get('/about', function () {
 /**
  * Auth Routes
  */
+Route::get('/fogetPassword', [ForgotPasswordController::class, 'ResetPassword'])->middleware('guest')->name('password.request');
 Route::get('/login', [LoginController::class, 'getloginpage'])->middleware('guest');
 Route::post('/login', [LoginController::class, 'login'])->name('login');
 Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
+// Route::get('/chef_departement/dashboard', [LoginController::class, 'logout'])->name('logout');
 
 // Auth::routes(['verify' => false]);
 
