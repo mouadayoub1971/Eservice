@@ -61,3 +61,14 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
         });
     });
 });
+
+
+Route::group(['prefix' => 'chef_departement/modules'], function () {
+    Route::get('/', [App\Http\Controllers\chef_departemeneController::class, 'index'])->name('chef_departemenet.mudules.index');
+    // Route::get('/create', 'UsersController@create')->name('users.create');
+    // Route::post('/create', 'UsersController@store')->name('users.store');
+    // Route::get('/{user}/show', 'UsersController@show')->name('users.show');
+    // Route::get('/{user}/edit', 'UsersController@edit')->name('users.edit');
+    // Route::patch('/{user}/update', 'UsersController@update')->name('users.update');
+    // Route::delete('/{user}/delete', 'UsersController@destroy')->name('users.destroy');
+});

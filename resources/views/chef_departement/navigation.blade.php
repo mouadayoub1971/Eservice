@@ -9,7 +9,8 @@
     </li>
 
     <li class="nav-item">
-        <a class="nav-link {{ request()->is('users*') ? 'active' : '' }}" href="{{ route('users.index') }}">
+        <a class="nav-link {{ request()->is('users*') ? 'active' : '' }}"
+            href="{{ route('chef_departemenet.mudules.index') }}">
             <svg class="nav-icon">
                 <use xlink:href="{{ asset('icons/coreui.svg#cil-user') }}"></use>
             </svg>
