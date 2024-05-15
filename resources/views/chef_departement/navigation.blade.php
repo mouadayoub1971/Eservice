@@ -19,7 +19,7 @@
     </li>
 
     <li class="nav-item">
-        <a class="nav-link {{ request()->is('roles*') ? 'active' : '' }}" href="{{ route('roles.index') }}">
+        <a class="nav-link {{ request()->is('roles*') ? 'active' : '' }}" href="{{ route('chef_departemenet.profs.index') }}">
             <svg class="nav-icon">
                 <use xlink:href="{{ asset('icons/coreui.svg#cil-zoom') }}"></use>
             </svg>

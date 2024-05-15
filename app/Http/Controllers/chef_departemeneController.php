@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+<<<<<<< HEAD
 use App\Models\classe;
 use App\Models\Filier;
 use App\Models\Module;
@@ -13,6 +14,12 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Request as FacadesRequest;
 use function Laravel\Prompts\error;
+=======
+use App\Models\Departement;
+use App\Models\User;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+>>>>>>> db5ec1b (Prof feature is improved)
 
 class chef_departemeneController extends Controller
 {
@@ -175,5 +182,34 @@ class chef_departemeneController extends Controller
 
         return View('chef_departement.modules.index')->with("name", 'chef_departement')->with("module_lists", $module_lists)->with("classes", $classes)
                 ->with('filier_id',$id);
+    }
+
+    public function profIndex()
+    {
+
+        $AuthenticateCurrentUser = auth::user()->departement_id;
+        $departement_name = Departement::find($AuthenticateCurrentUser)->name;
+        $profs = User::where('departement_id', $AuthenticateCurrentUser)->where('role_id', 2)->get();
+        $profDoesntHaveDepartement = User::whereNull('departement_id')
+        ->where('role_id', 2)->get();
+        return View('chef_departement.profs.index', ['profs'=>$profs , 'departementName'=>$departement_name, 'otherProfs'=>$profDoesntHaveDepartement])->with("name", 'chef_departement');
+    }
+    public function profDestroy($profId){
+            $prof = User::find($profId);
+            if($prof){
+            $prof->departement_id = null;
+            $prof->save();
+            }
+            return redirect()->route('chef_departemenet.profs.index');
+    }
+    public function profStore() {
+        $data = request()->all();
+        //$profId = $data[chosenId];
+        $profId = request()->chosenId;
+        $departement = auth::user()->departement_id;
+        $prof = User::find($profId);
+        $prof->departement_id = $departement;
+        $prof->save();
+        return redirect()->route('chef_departemenet.profs.index');
     }
 }

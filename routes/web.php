@@ -83,3 +83,16 @@ Route::group(['prefix' => 'chef_departement/filiers'], function () {
     // Route::patch('/{user}/update', 'UsersController@update')->name('users.update');
     // Route::delete('/{user}/delete', 'UsersController@destroy')->name('users.destroy');
 });
+
+// profs route
+Route::group(['prefix' => 'chef_departement/profs'], function () {
+    Route::get('/', [App\Http\Controllers\chef_departemeneController::class, 'ProfIndex'])->name('chef_departemenet.profs.index');
+    Route::post('/', [App\Http\Controllers\chef_departemeneController::class, 'profStore'])->name('chef_departemenet.profs.store');
+    Route::delete('/{prof}', [App\Http\Controllers\chef_departemeneController::class, 'profDestroy'])->name('chef_departemenet.profs.destroy');
+    // Route::get('/create', 'UsersController@create')->name('users.create');
+    // Route::post('/create', 'UsersController@store')->name('users.store');
+    // Route::get('/{user}/show', 'UsersController@show')->name('users.show');
+    // Route::get('/{user}/edit', 'UsersController@edit')->name('users.edit');
+    // Route::patch('/{user}/update', 'UsersController@update')->name('users.update');
+    // Route::delete('/{user}/delete', 'UsersController@destroy')->name('users.destroy');
+});
