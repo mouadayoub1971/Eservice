@@ -66,9 +66,17 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
 });
 
 
-Route::group(['prefix' => 'chef_departement/modules'], function () {
-    Route::get('/', [App\Http\Controllers\chef_departemeneController::class, 'index'])->name('chef_departemenet.mudules.index');
-    // Route::get('/create', 'UsersController@create')->name('users.create');
+Route::group(['prefix' => 'chef_departement/filiers'], function () {
+    Route::get('/', [App\Http\Controllers\chef_departemeneController::class, 'index_filier'])->name('chef_departement.filiers.index');
+    Route::get('/modules/{id}', [App\Http\Controllers\chef_departemeneController::class, 'show_modules'])->name('chef_departement.filiers.modules');
+
+    Route::group(['prefix' => 'module'], function () {
+        Route::get('/create/{filier_id}', [App\Http\Controllers\chef_departemeneController::class, 'create_module'])->name('chef_departement.module.create');
+        Route::post('/create/{filier_id}', [App\Http\Controllers\chef_departemeneController::class, 'store_module'])->name('chef_departement.module.store');
+        Route::delete('/delete/{filier_id}{module_id}{prof_id}', [App\Http\Controllers\chef_departemeneController::class, 'delete_module'])->name('chef_departement.filiers.module.delete');
+
+    });
+
     // Route::post('/create', 'UsersController@store')->name('users.store');
     // Route::get('/{user}/show', 'UsersController@show')->name('users.show');
     // Route::get('/{user}/edit', 'UsersController@edit')->name('users.edit');

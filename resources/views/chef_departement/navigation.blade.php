@@ -10,11 +10,11 @@
 
     <li class="nav-item">
         <a class="nav-link {{ request()->is('users*') ? 'active' : '' }}"
-            href="{{ route('chef_departemenet.mudules.index') }}">
+            href="{{ route('chef_departement.filiers.index') }}">
             <svg class="nav-icon">
                 <use xlink:href="{{ asset('icons/coreui.svg#cil-user') }}"></use>
             </svg>
-            {{ __('Modules') }}
+            {{ __('Filiers') }}
         </a>
     </li>
 

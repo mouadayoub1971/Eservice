@@ -15,9 +15,11 @@ return new class extends Migration
             $table->id();
             $table->bigInteger('module_id',false,true);
             $table->bigInteger('filier_id',false,true);
+            $table->bigInteger('classe_id',false,true);
             $table->timestamps();
             $table->foreign('module_id')->references('id')->on('modules');
             $table->foreign('filier_id')->references('id')->on('filiers');
+            $table->foreign('classe_id')->references('id')->on('classes');
         });
     }
 

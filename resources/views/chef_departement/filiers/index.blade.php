@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('title')
-    Modules
+    Filiers
 @endsection
 
 @section('content')
@@ -11,7 +11,7 @@
                 <div class="row">
                     <div class="col-sm-12">
                         <div class="page-sub-header">
-                            <h3 class="page-title">Modules</h3>
+                            <h3 class="page-title">Filiers</h3>
                             {{-- <ul class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="#">Modules</a></li>
                                 <li class="breadcrumb-item active">All Students</li>
@@ -22,7 +22,8 @@
             </div>
             {{-- message --}}
             {{-- {!! Toastr::message() !!} --}}
-            <form action="">
+            <form action="" method="GET">
+
                 <div class="student-group-form p-4">
                     <div class="row">
                         <div class="col-lg-3 col-md-6">
@@ -35,22 +36,6 @@
                             <div class="form-group">
                                 <input type="text" class="form-control" placeholder="Search by Name ..." name='name'
                                     value="{{ Request::get('name') }}">
-                            </div>
-                        </div>
-                        <div class="col-lg-3 col-md-6">
-                            <div class="form-group">
-                                <select class="form-control" id="exampleFormControlSelect1" name="classe"
-                                    value="{{ Request::get('classe') }}" >
-                                    @if (!empty(Request::get('classe')))
-                                        <option value="">Search by classe ...</option>
-                                        <option selected hidden>{{ Request::get('classe') }}</option>
-                                    @else
-                                        <option selected  value="">Search by classe ...</option>
-                                    @endif
-                                    @foreach ($classes as $key => $classe)
-                                        <option value="{{ $classe->name }}">{{ $classe->name }}</option>
-                                    @endforeach
-                                </select>
                             </div>
                         </div>
                         <div class="col-lg-2">
@@ -68,26 +53,20 @@
                             <div class="page-header">
                                 <div class="row align-items-center">
                                     <div class="col">
-                                        <h3 class="page-title">Modules</h3>
+                                        <h3 class="page-title">Filier list</h3>
                                     </div>
                                     <div class="col-auto text-end float-end ms-auto download-grp">
-                                         {{--<a  href="#">
-                                            <svg  width="50px" height="50px"">
-                                                <use  xlink:href="{{ asset('icons/coreui.svg#cil-user') }}"></use>
+                                        {{-- <a class="nav-item active" href="#">
+                                            <svg class="nav-icon">
+                                                <use xlink:href="{{ asset('icons/coreui.svg#cil-image-plus') }}"></use>
                                             </svg>
                                             {{ __('teachers') }}
-                                        </a>--}}
+                                        </a> --}}
                                         <a href="#" class="btn btn-outline-gray me-2">
                                             <i class="fa fa-th" aria-hidden="true"></i>
                                         </a>
                                         <a href="#" class="btn btn-outline-primary me-2"><i
                                                 class="fas fa-download"></i> Download</a>
-
-
-
-                                        <a href="{{ Route('chef_departement.module.create',['filier_id'=>$filier_id])}}"
-                                            class="btn btn-primary">+add</a>
-
 
                                     </div>
                                 </div>
@@ -105,57 +84,33 @@
                                             </th>
                                             <th>ID</th>
                                             <th>Name</th>
-                                            <th>Professeur</th>
-                                            <th>classe</th>
+                                            <th>chef_filier</th>
                                             <th>Created at</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($module_lists as $key => $module_list)
+                                        @foreach ($filiers as $key => $filier)
                                             <tr class=" fw-bolder">
                                                 <td>
                                                     <div class="form-check check-tables">
-                                                        <input class="form-check-input checkbox_elements" type="checkbox" value="something">
+                                                        <input class="form-check-input checkbox_elements" type="checkbox" value="something" id="checkbox_elements">
                                                     </div>
                                                 </td>
 
-                                                <td class="id">{{ $module_list->id }}</td>
+                                                <td class="id">{{ $filier->id }}</td>
 
-                                                <td>{{ $module_list->module }}</td>
-                                                <td>{{ $module_list->prof }}</td>
-                                                <td>{{ $module_list->classe }}</td>
-                                                <td>{{ $module_list->created_at }}</td>
+                                                <td>{{ $filier->name }}</td>
+                                                <td>{{ $filier->cordinateur_id }}</td>
+                                                <td>{{ $filier->created_at }}</td>
 
                                                 <td class="text-end">
 
+                                                    <a href="{{ Route('chef_departement.filiers.modules', ['id' => $filier->id]) }}"
+                                                        class="btn btn-primary text-light  fw-bolder">
+                                                        show
+                                                    </a>
 
-
-                                                    <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#{{$module_list->id}}">
-                                                        delete
-                                                    </button>
-
-                                                    <!-- Scrollable modal -->
-                                                    <div class="modal fade" id="{{$module_list->id}}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                                                        <div class="modal-dialog modal-dialog-centered">
-                                                            <div class="modal-content">
-                                                                <div class="modal-header">
-                                                                    <h1 class="modal-title fs-5" id="staticBackdropLabel">!</h1>
-                                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                                </div>
-                                                                <div class="modal-body text-center">
-                                                                    Are you sur ??
-                                                                </div>
-                                                                <div class="modal-footer">
-                                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-
-                                                                    {!! Form::open(['method' => 'DELETE', 'route' => ['chef_departement.filiers.module.delete', ["filier_id"=>$filier_id,"module_id"=>$module_list->id,'prof_id'=>$module_list->prof_id]], 'style' => 'display:inline']) !!}
-                                                                    {!! Form::submit('Yes', ['class' => 'btn btn-danger ']) !!}
-                                                                    {!! Form::close() !!}
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
 
                                                 </td>
                                             </tr>
@@ -189,3 +144,6 @@
 
     </script>
 @endsection
+
+
+

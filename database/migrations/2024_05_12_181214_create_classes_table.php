@@ -11,12 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('filiers', function (Blueprint $table) {
+        Schema::create('classes', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->bigInteger('cordinateur_id',false,true);
+            $table->bigInteger('departement_id', false, true);
+            $table->bigInteger('filier_id', false, true)->nullable();
             $table->timestamps();
-            $table->foreign('cordinateur_id')->references('id')->on('users');
+            $table->foreign('departement_id')->references('id')->on('departements');
+            $table->foreign('filier_id')->references('id')->on('filiers');
         });
     }
 
@@ -25,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('filiers');
+        Schema::dropIfExists('classes');
     }
 };

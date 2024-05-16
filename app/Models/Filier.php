@@ -11,6 +11,7 @@ class Filier extends Model
     use HasFactory;
     protected $fillable = [
         'name',
-        'cordinateur_id'
+        'cordinateur_id',
+        'departement_id'
     ];
 }
