@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-<<<<<<< HEAD
 use App\Models\classe;
 use App\Models\Filier;
 use App\Models\Module;
@@ -13,13 +12,16 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Request as FacadesRequest;
-use function Laravel\Prompts\error;
-=======
 use App\Models\Departement;
+<<<<<<< HEAD
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 >>>>>>> db5ec1b (Prof feature is improved)
+=======
+
+
+>>>>>>> 906b2f1 (starte cordinateur_filier)
 
 class chef_departemeneController extends Controller
 {

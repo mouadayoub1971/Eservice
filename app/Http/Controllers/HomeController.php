@@ -22,6 +22,7 @@ class HomeController extends Controller
     public function index()
     {
         if (Auth::user()->role_id == 3) return view('chef_departement.home')->with('name', "chef_departement");
+        if (Auth::user()->role_id == 4) return view('cordinnateur_filier.home')->with('name', "cordinnateur_filier");
         return view('home')->with('name', 'layouts');
     }
 

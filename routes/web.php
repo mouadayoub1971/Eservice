@@ -43,6 +43,53 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
          */
         Route::get('dashboard', [App\Http\Controllers\HomeController::class, 'index'])->name('dashboard');
         /**
+         * chef_departement
+         */
+        Route::group(['prefix' => 'chef_departement/filiers'], function () {
+            Route::get('/', [App\Http\Controllers\chef_departemeneController::class, 'index_filier'])->name('chef_departement.filiers.index');
+            Route::get('/modules/{id}', [App\Http\Controllers\chef_departemeneController::class, 'show_modules'])->name('chef_departement.filiers.modules');
+
+            Route::group(['prefix' => 'module'], function () {
+                Route::get('/create/{filier_id}', [App\Http\Controllers\chef_departemeneController::class, 'create_module'])->name('chef_departement.module.create');
+                Route::post('/create/{filier_id}', [App\Http\Controllers\chef_departemeneController::class, 'store_module'])->name('chef_departement.module.store');
+                Route::delete('/delete/{filier_id}{module_id}{prof_id}', [App\Http\Controllers\chef_departemeneController::class, 'delete_module'])->name('chef_departement.filiers.module.delete');
+            });
+        });
+
+
+        /**
+         * khchi routes dyalek hna  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+         */
+
+
+
+
+
+
+
+
+
+         /**
+         * cordinateur_filier
+         */
+
+        Route::group(['prefix' => 'cordinateur_filier/modules'], function () {
+            Route::get('/', [App\Http\Controllers\Cordinateur_filier::class, 'index_module'])->name('cordinateur_filier.Module.index');
+
+           /*Route::get('/modules/{id}', [App\Http\Controllers\chef_departemeneController::class, 'show_modules'])->name('chef_departement.filiers.modules');
+
+            Route::group(['prefix' => 'module'], function () {
+                Route::get('/create/{filier_id}', [App\Http\Controllers\chef_departemeneController::class, 'create_module'])->name('chef_departement.module.create');
+                Route::post('/create/{filier_id}', [App\Http\Controllers\chef_departemeneController::class, 'store_module'])->name('chef_departement.module.store');
+                Route::delete('/delete/{filier_id}{module_id}{prof_id}', [App\Http\Controllers\chef_departemeneController::class, 'delete_module'])->name('chef_departement.filiers.module.delete');
+            });*/
+        });
+
+
+
+
+
+        /**
          * Role Routes
          */
         Route::resource('roles', App\Http\Controllers\RolesController::class);
@@ -66,23 +113,6 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
 });
 
 
-Route::group(['prefix' => 'chef_departement/filiers'], function () {
-    Route::get('/', [App\Http\Controllers\chef_departemeneController::class, 'index_filier'])->name('chef_departement.filiers.index');
-    Route::get('/modules/{id}', [App\Http\Controllers\chef_departemeneController::class, 'show_modules'])->name('chef_departement.filiers.modules');
-
-    Route::group(['prefix' => 'module'], function () {
-        Route::get('/create/{filier_id}', [App\Http\Controllers\chef_departemeneController::class, 'create_module'])->name('chef_departement.module.create');
-        Route::post('/create/{filier_id}', [App\Http\Controllers\chef_departemeneController::class, 'store_module'])->name('chef_departement.module.store');
-        Route::delete('/delete/{filier_id}{module_id}{prof_id}', [App\Http\Controllers\chef_departemeneController::class, 'delete_module'])->name('chef_departement.filiers.module.delete');
-
-    });
-
-    // Route::post('/create', 'UsersController@store')->name('users.store');
-    // Route::get('/{user}/show', 'UsersController@show')->name('users.show');
-    // Route::get('/{user}/edit', 'UsersController@edit')->name('users.edit');
-    // Route::patch('/{user}/update', 'UsersController@update')->name('users.update');
-    // Route::delete('/{user}/delete', 'UsersController@destroy')->name('users.destroy');
-});
 
 // profs route
 Route::group(['prefix' => 'chef_departement/profs'], function () {
