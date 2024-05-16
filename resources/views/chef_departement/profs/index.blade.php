@@ -67,6 +67,16 @@
                                 </div>
                             </div> --}}
 
+                                <!-- Modal -->
+<div id="confirmModal" class="modal">
+  <div class="modal-content">
+    <p id="confirmMessage">Are you sure you want to delete this item?</p>
+    <div class="modal-buttons">
+      <button id="confirmYes">Yes</button>
+      <button id="confirmNo">No</button>
+    </div>
+  </div>
+</div>
 
                                 <div class="table-responsive">
                                     <table
@@ -108,13 +118,57 @@
                                         <td>{{$prof->gender}}</td>
                                         <td>{{$prof->anne}}</td>
                                         <td>
+    <form id="form-{{ $prof->id }}" class="delete-form" action="{{ route('chef_departemenet.profs.destroy', ['prof' => $prof->id]) }}" method="POST">
+        @csrf
+        @method('DELETE')
+        <button class="delete-button" data-prof-id="{{ $prof->id }}">Delete</button>
+    </form>
+</td>
+
+<script>
+    // Open modal
+function openModal(message, callback) {
+  document.getElementById('confirmMessage').innerText = message;
+  document.getElementById('confirmModal').style.display = 'block';
+
+  // Yes button
+  document.getElementById('confirmYes').addEventListener('click', function() {
+    document.getElementById('confirmModal').style.display = 'none';
+    callback(true);
+  });
+
+  // No button
+  document.getElementById('confirmNo').addEventListener('click', function() {
+    document.getElementById('confirmModal').style.display = 'none';
+    callback(false);
+  });
+}
+
+// Usage
+document.addEventListener('click', function(event) {
+  if (event.target.classList.contains('delete-button')) {
+    event.preventDefault();
+    openModal('Are you sure you want to delete this Joe?', function(confirmed) {
+      if (confirmed) {
+        var profId = event.target.dataset.profId;
+        var form = document.getElementById('form-' + profId);
+        form.submit();
+      }
+    });
+  }
+});
+
+</script>
+
+                                        {{-- <td>
+
                                             <a href="{{ route('chef_departemenet.profs.destroy', ['prof' => $prof->id]) }}" onclick="event.preventDefault(); if(confirm('Are you sure you want to delete this item?')) { document.getElementById('delete-form-{{$prof->id}}').submit(); }">
                                             <button type="button" class="btn btn-danger">Danger</button>
                                         </a>
                                         <form id="delete-form-{{$prof->id}}" action="{{ route('chef_departemenet.profs.destroy', ['prof' => $prof->id]) }}" method="POST" style="display: none;">
                                             @csrf
                                             @method('DELETE')
-                                        </form></td>
+                                        </form></td> --}}
                                     </tr>
                                     @endforeach
                                     </tbody>
