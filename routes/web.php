@@ -52,7 +52,7 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
             Route::group(['prefix' => 'module'], function () {
                 Route::get('/create/{filier_id}', [App\Http\Controllers\chef_departemeneController::class, 'create_module'])->name('chef_departement.module.create');
                 Route::post('/create/{filier_id}', [App\Http\Controllers\chef_departemeneController::class, 'store_module'])->name('chef_departement.module.store');
-                Route::delete('/delete/{filier_id}{module_id}{prof_id}', [App\Http\Controllers\chef_departemeneController::class, 'delete_module'])->name('chef_departement.filiers.module.delete');
+                Route::delete('/delete/{filier_id}{module_id}{prof_id?}', [App\Http\Controllers\chef_departemeneController::class, 'delete_module'])->name('chef_departement.filiers.module.delete');
             });
         });
 
@@ -74,7 +74,9 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
          */
 
         Route::group(['prefix' => 'cordinateur_filier/modules'], function () {
-            Route::get('/', [App\Http\Controllers\Cordinateur_filier::class, 'index_module'])->name('cordinateur_filier.Module.index');
+            Route::get('/', [App\Http\Controllers\Cordinateur_filierController::class, 'index_module'])->name('cordinateur_filier.Module.index');
+            Route::post('/', [App\Http\Controllers\Cordinateur_filierController::class, 'index_module'])->name('cordinateur_filier.Module.index');
+            Route::post('/save', [App\Http\Controllers\Cordinateur_filierController::class, 'save_module'])->name('cordinateur_filier.Module.save');
 
            /*Route::get('/modules/{id}', [App\Http\Controllers\chef_departemeneController::class, 'show_modules'])->name('chef_departement.filiers.modules');
 

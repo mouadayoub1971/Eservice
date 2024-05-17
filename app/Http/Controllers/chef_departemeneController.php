@@ -8,6 +8,7 @@ use App\Models\Module;
 use App\Models\Module_filier;
 use App\Models\Module_prof;
 use App\Models\User;
+use App\Services\ModuleServices;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -25,6 +26,13 @@ use Illuminate\Support\Facades\Auth;
 
 class chef_departemeneController extends Controller
 {
+
+
+    public  $ModuleServices;
+    public  function  __construct ( ModuleServices $ModuleServices )
+    {
+        $this->ModuleServices = $ModuleServices;
+    }
     public function index_filier()
     {
 
@@ -101,16 +109,25 @@ class chef_departemeneController extends Controller
                 'module_id' => $module->id,
                 'prof_id' => $request->prof_id,
             ]);
+        }else{
+
+            $module_prof = Module_prof::create([
+                'module_id' => $module->id,
+                'prof_id' => null,
+            ]);
+
         }
 
         return redirect("chef_departement/filiers/modules/$filier_id");
     }
 
-    public  function  delete_module($filier_id,$module_id,$prof_id)
+    public  function  delete_module($filier_id,$module_id,$prof_id = '')
     {
 
+        if($prof_id!='') DB::table('module_profs')->where('module_id', $module_id)->where("prof_id",$prof_id)->delete();
+        else DB::table('module_profs')->where('module_id', $module_id)->delete();
 
-        DB::table('module_profs')->where('module_id', $module_id)->where("prof_id",$prof_id)->delete();
+
 
         DB::table('module_filiers')->where('module_id', $module_id)->where("filier_id",$filier_id)->delete();
         DB::table('modules')->where('id', $module_id)->delete();
@@ -129,7 +146,7 @@ class chef_departemeneController extends Controller
         $module_lists = DB::table('modules')
             ->join('module_filiers', "modules.id", '=', 'module_filiers.module_id')
             ->join('module_profs', "modules.id", '=', "module_profs.module_id")
-            ->join('users', "module_profs.prof_id", '=', 'users.id')
+            ->leftJoin('users', "module_profs.prof_id", '=', 'users.id')
             ->join('classes', 'module_filiers.classe_id', '=', 'classes.id')
             ->select(
                 'modules.id as id',
@@ -141,44 +158,7 @@ class chef_departemeneController extends Controller
                 'module_filiers.filier_id as filier_id'
             );
 
-
-        if(!empty(FacadesRequest::get('id'))){
-
-            $module_lists = $module_lists->where('module_filiers.filier_id', $id)
-                ->where('modules.id', FacadesRequest::get('id'))
-                ->get();
-
-            return View('chef_departement.modules.index')->with("name", 'chef_departement')
-                ->with("module_lists", $module_lists)->with("classes", $classes);
-
-        }
-
-
-
-        if (!empty(FacadesRequest::get('classe')) && empty(FacadesRequest::get('name'))) {
-            $module_lists = $module_lists ->where('module_filiers.filier_id', $id)
-                ->where('classes.name', FacadesRequest::get('classe'))
-                ->get();
-        }
-        else if (!empty(FacadesRequest::get('name')) && empty(FacadesRequest::get('classe'))) {
-            $module_lists = $module_lists ->where('module_filiers.filier_id', $id)
-                ->where('modules.name', FacadesRequest::get('name'))
-                ->get();
-
-
-
-        }
-        else if (!empty(FacadesRequest::get('name')) && !empty(FacadesRequest::get('classe'))) {
-            $module_lists = $module_lists ->where('module_filiers.filier_id', $id)
-                ->where('modules.name', FacadesRequest::get('name'))
-                ->where('classe.name', FacadesRequest::get('classe'))
-                ->get();
-        }
-        else {
-            $module_lists = $module_lists->where('module_filiers.filier_id', $id)->get();
-        };
-
-
+        $module_lists =  $this->ModuleServices->getmodules($module_lists,$id);
 
 
 

@@ -12,16 +12,12 @@
                     <div class="col-sm-12">
                         <div class="page-sub-header">
                             <h3 class="page-title">Modules</h3>
-                            {{-- <ul class="breadcrumb">
-                                <li class="breadcrumb-item"><a href="#">Modules</a></li>
-                                <li class="breadcrumb-item active">All Students</li>
-                            </ul> --}}
+
                         </div>
                     </div>
                 </div>
             </div>
-            {{-- message --}}
-            {{-- {!! Toastr::message() !!} --}}
+
             <form action="">
                 <div class="student-group-form p-4">
                     <div class="row">
@@ -38,6 +34,7 @@
                             </div>
                         </div>
                         <div class="col-lg-3 col-md-6">
+
                             <div class="form-group">
                                 <select class="form-control" id="exampleFormControlSelect1" name="classe"
                                     value="{{ Request::get('classe') }}" >
@@ -49,9 +46,12 @@
                                     @endif
                                     @foreach ($classes as $key => $classe)
                                         <option value="{{ $classe->name }}">{{ $classe->name }}</option>
+
                                     @endforeach
                                 </select>
                             </div>
+
+
                         </div>
                         <div class="col-lg-2">
                             <div class="search-student-btn">
@@ -77,16 +77,10 @@
                                             </svg>
                                             {{ __('teachers') }}
                                         </a>--}}
-                                        <a href="#" class="btn btn-outline-gray me-2">
-                                            <i class="fa fa-th" aria-hidden="true"></i>
-                                        </a>
+
                                         <a href="#" class="btn btn-outline-primary me-2"><i
                                                 class="fas fa-download"></i> Download</a>
 
-
-
-                                        <a href="{{ Route('chef_departement.module.create',['filier_id'=>$filier_id])}}"
-                                            class="btn btn-primary">+add</a>
 
 
                                     </div>
@@ -94,6 +88,8 @@
                             </div>
 
                             <div class="table-responsive">
+                                <form action="{{Route("cordinateur_filier.Module.save")}}"  method="POST">
+                                    @csrf
                                 <table
                                     class="table border-0 star-student table-hover table-center mb-0 datatable table-striped">
                                     <thead class="student-thread">
@@ -108,12 +104,17 @@
                                             <th>Professeur</th>
                                             <th>classe</th>
                                             <th>Created at</th>
-                                            <th>Action</th>
+
                                         </tr>
                                     </thead>
                                     <tbody>
+
+
+
+
                                         @foreach ($module_lists as $key => $module_list)
                                             <tr class=" fw-bolder">
+
                                                 <td>
                                                     <div class="form-check check-tables">
                                                         <input class="form-check-input checkbox_elements" type="checkbox" value="something">
@@ -123,45 +124,32 @@
                                                 <td class="id">{{ $module_list->id }}</td>
 
                                                 <td>{{ $module_list->module }}</td>
-                                                <td>{{ $module_list->prof }}</td>
+                                                <td>
+                                                    <select class="form-select" aria-label="Default select example" name="{{$module_list->module_prof_id}}">
+                                                        <option value="default" selected >{{ $module_list->prof}}</option>
+                                                        @foreach($profs as $key => $prof)
+                                                            <option value="{{ $prof->id}}"  >{{ $prof->name}}</option>
+                                                        @endforeach
+                                                    </select>
+                                                </td>
                                                 <td>{{ $module_list->classe }}</td>
                                                 <td>{{ $module_list->created_at }}</td>
 
-                                                <td class="text-end">
 
-
-
-                                                    <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#{{$module_list->id}}">
-                                                        delete
-                                                    </button>
-
-                                                    <!-- Scrollable modal -->
-                                                    <div class="modal fade" id="{{$module_list->id}}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                                                        <div class="modal-dialog modal-dialog-centered">
-                                                            <div class="modal-content">
-                                                                <div class="modal-header">
-                                                                    <h1 class="modal-title fs-5" id="staticBackdropLabel">!</h1>
-                                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                                </div>
-                                                                <div class="modal-body text-center">
-                                                                    Are you sur ??
-                                                                </div>
-                                                                <div class="modal-footer">
-                                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-
-                                                                    {!! Form::open(['method' => 'DELETE', 'route' => ['chef_departement.filiers.module.delete', ["filier_id"=>$filier_id,"module_id"=>$module_list->id,'prof_id'=>$module_list->prof_id]], 'style' => 'display:inline']) !!}
-                                                                    {!! Form::submit('Yes', ['class' => 'btn btn-danger ']) !!}
-                                                                    {!! Form::close() !!}
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-
-                                                </td>
                                             </tr>
                                         @endforeach
+
+
+
+
+
                                     </tbody>
                                 </table>
+
+                                            <button type="submit" class="btn btn-outline-success bg-success active m-4"> Save</button>
+
+                                </form>
+                                <div class="text-center text-danger font-monospace fw-bold">{{$message}}</div>
                             </div>
                         </div>
                     </div>

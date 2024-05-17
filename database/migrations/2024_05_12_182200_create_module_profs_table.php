@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('module_profs', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('module_id',false,true);
-            $table->bigInteger('prof_id',false,true);
+            $table->bigInteger('prof_id',false,true)->nullable();
             $table->timestamps();
             $table->foreign('module_id')->references('id')->on('modules');
             $table->foreign('prof_id')->references('id')->on('users');
