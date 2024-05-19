@@ -1,25 +1,27 @@
+
+
 <ul class="sidebar-nav" data-coreui="navigation" data-simplebar>
     <li class="nav-item">
         <a class="nav-link" href="{{ route('dashboard') }}">
             <svg class="nav-icon">
                 <use xlink:href="{{ asset('icons/coreui.svg#cil-speedometer') }}"></use>
             </svg>
-            {{ __('Dashboard') }}
+           Dashboard
         </a>
     </li>
 
-    <li class="nav-item">
-        <a class="nav-link {{ request()->is('users*') ? 'active' : '' }}"
+    <li class="nav-item ">
+        <a class="nav-link  {{ request()->is('modules*') ? 'active' : '' }}"
             href="{{Route("cordinateur_filier.Module.index")}}">
             <svg class="nav-icon">
                 <use xlink:href="{{ asset('icons/coreui.svg#cil-user') }}"></use>
             </svg>
-            {{ __('Modules') }}
+            Modules
         </a>
     </li>
 
     <li class="nav-item">
-        <a class="nav-link {{ request()->is('roles*') ? 'active' : '' }}" href="#">
+        <a class="nav-link {{ request()->is('TimeTable*') ? 'active' : '' }}" href="{{Route("cordinateur_filier.TimeTable.index",['classe'=>''])}}">
             <svg class="nav-icon">
                 <use xlink:href="{{ asset('icons/coreui.svg#cil-zoom') }}"></use>
             </svg>

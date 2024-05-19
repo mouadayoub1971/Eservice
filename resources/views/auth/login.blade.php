@@ -2,7 +2,19 @@
 
 @section('content')
     <div class="col-lg-12">
+
+
         <div class="card-group d-block d-md-flex row">
+
+            <div class="card col-md-3 text-white p-0 ">
+
+                {{-- <div>
+                        <h2>{{ __('Sign up') }}</h2>
+                        <a href="#" class="btn btn-lg btn-outline-light mt-3">{{ __('Register') }}</a>
+                    </div> --}}
+                <img src="{{ asset('img/login2.png') }}" alt="" class="card-img-top">
+
+            </div>
             <div class="card col-md-7 p-4 mb-0">
                 <div class="card-body">
                     <h1>{{ __('Login') }}</h1>
@@ -49,15 +61,7 @@
                     </form>
                 </div>
             </div>
-            <div class="card col-md-5 text-white p-0 ">
 
-                {{-- <div>
-                        <h2>{{ __('Sign up') }}</h2>
-                        <a href="#" class="btn btn-lg btn-outline-light mt-3">{{ __('Register') }}</a>
-                    </div> --}}
-                <img src="{{ asset('img/login.jpg') }}" alt="" class="card-img-top">
-
-            </div>
         </div>
     </div>
 @endsection

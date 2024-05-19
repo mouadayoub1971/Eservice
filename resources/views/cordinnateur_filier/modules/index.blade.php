@@ -78,7 +78,7 @@
                                             {{ __('teachers') }}
                                         </a>--}}
 
-                                        <a href="#" class="btn btn-outline-primary me-2"><i
+                                        <a href="{{Route('cordinateur_filier.Module.download',['classe'=>Request::get('classe')])}}" class="btn btn-outline-primary me-2"><i
                                                 class="fas fa-download"></i> Download</a>
 
 

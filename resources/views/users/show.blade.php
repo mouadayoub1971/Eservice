@@ -18,9 +18,6 @@ Show User
                 <div>
                     Email: {{ $user->email }}
                 </div>
-                <div>
-                    Username: {{ $user->username }}
-                </div>
 
                 <div class="mt-4">
                     <a href="{{ route('users.edit', $user->id) }}" class="btn btn-info">Edit</a>

@@ -32,9 +32,15 @@ Route::get('/fogetPassword', [ForgotPasswordController::class, 'ResetPassword'])
 Route::get('/login', [LoginController::class, 'getloginpage'])->middleware('guest');
 Route::post('/login', [LoginController::class, 'login'])->name('login');
 Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
+
+
+
 // Route::get('/chef_departement/dashboard', [LoginController::class, 'logout'])->name('logout');
 
 // Auth::routes(['verify' => false]);
+
+
+
 
 Route::group(['namespace' => 'App\Http\Controllers'], function () {
     Route::middleware('auth')->group(function () {
@@ -77,6 +83,7 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
             Route::get('/', [App\Http\Controllers\Cordinateur_filierController::class, 'index_module'])->name('cordinateur_filier.Module.index');
             Route::post('/', [App\Http\Controllers\Cordinateur_filierController::class, 'index_module'])->name('cordinateur_filier.Module.index');
             Route::post('/save', [App\Http\Controllers\Cordinateur_filierController::class, 'save_module'])->name('cordinateur_filier.Module.save');
+            Route::get('/download', [App\Http\Controllers\Cordinateur_filierController::class, 'download_module'])->name('cordinateur_filier.Module.download');
 
            /*Route::get('/modules/{id}', [App\Http\Controllers\chef_departemeneController::class, 'show_modules'])->name('chef_departement.filiers.modules');
 
@@ -85,6 +92,10 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
                 Route::post('/create/{filier_id}', [App\Http\Controllers\chef_departemeneController::class, 'store_module'])->name('chef_departement.module.store');
                 Route::delete('/delete/{filier_id}{module_id}{prof_id}', [App\Http\Controllers\chef_departemeneController::class, 'delete_module'])->name('chef_departement.filiers.module.delete');
             });*/
+        });
+        Route::group(['prefix' => 'cordinateur_filier/TimeTable'], function () {
+            Route::get('/{classe?}', [App\Http\Controllers\Cordinateur_filierController::class, 'index_TimeTable'])->name('cordinateur_filier.TimeTable.index');
+
         });
 
 
