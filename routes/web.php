@@ -95,6 +95,7 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
         });
         Route::group(['prefix' => 'cordinateur_filier/TimeTable'], function () {
             Route::get('/{classe?}', [App\Http\Controllers\Cordinateur_filierController::class, 'index_TimeTable'])->name('cordinateur_filier.TimeTable.index');
+            Route::get('/download/{classe?}', [App\Http\Controllers\Cordinateur_filierController::class, 'download_TimeTable'])->name('cordinateur_filier.TimeTable.download');
 
         });
 

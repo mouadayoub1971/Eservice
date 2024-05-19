@@ -9,9 +9,9 @@
 
     <title>
         @if (trim($__env->yieldContent('title')))
-            @yield('title') | {{ config('app.name', 'Laravel') }}
+            @yield('title') | {{ config('app.name', 'E-services') }}
         @else
-            {{ config('app.name', 'Laravel') }}
+            {{ config('app.name', 'E-services') }}
         @endif
     </title>
     <meta name="theme-color" content="#ffffff">
@@ -20,6 +20,7 @@
     @vite('resources/sass/app.scss')
     @stack('after-styles')
 
+    <link rel="icon" type="image/png" href="{{ asset('img/ensah.png') }}">
 
 </head>
 

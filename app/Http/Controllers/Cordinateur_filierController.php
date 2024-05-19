@@ -7,6 +7,7 @@ use App\Models\classe;
 use App\Models\Module_prof;
 use App\Models\User;
 use App\Services\ModuleServices;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -111,7 +112,7 @@ class Cordinateur_filierController extends Controller
 
 
 
-    public  function index_TimeTable($classe = ''){
+    public  function index_TimeTable($classe_id = ''){
 
         $classes = classe::where('filier_id', Auth::user()->filier_id)->get();
 
@@ -131,7 +132,7 @@ class Cordinateur_filierController extends Controller
                 'time_tables.end_time as end_time',
 
             )->where('module_filiers.filier_id',Auth::user()->filier_id)
-            ->where("classes.id",$classe)
+            ->where("classes.id",$classe_id)
             ->get();
 
 
@@ -140,6 +141,39 @@ class Cordinateur_filierController extends Controller
 
         return View('cordinnateur_filier.TimeTable.index')->with('name','cordinnateur_filier')
             ->with('timeTable',$timeTable)
-            ->with('isTimeInInterval' , [$this, 'isTimeInInterval'])->with("classes",$classes);
+            ->with('isTimeInInterval' , [$this, 'isTimeInInterval'])->with("classes",$classes)
+            ->with('classe_id',$classe_id);
+    }public  function download_TimeTable($classe_id = ''){
+
+        $timeTable = DB::table('time_tables')
+            ->join('module_filiers','module_filiers.id','time_tables.module_filier_id')
+            ->join('module_profs','module_filiers.module_id','module_profs.module_id')
+            ->join('modules','modules.id','module_filiers.module_id')
+            ->join('users','users.id','module_profs.prof_id')
+                ->join('classes','classes.id','module_filiers.classe_id')
+                ->select(
+                'time_tables.id as id',
+                'modules.name as name',
+                'users.name as prof',
+                'time_tables.start_time as start_time',
+                'time_tables.day as day',
+                'time_tables.title as title',
+                'time_tables.end_time as end_time',
+            )->where('module_filiers.filier_id',Auth::user()->filier_id)
+            ->where("classes.id",$classe_id)
+            ->get();
+
+
+
+    $data = [
+        'timeTable'=>$timeTable,
+        'isTimeInInterval' => [$this, 'isTimeInInterval']
+    ];
+    $pdf = Pdf::loadView('cordinnateur_filier.TimeTable.TimeTableView', $data);
+
+    return $pdf->download('document.pdf');
+
+
+
     }
 }
