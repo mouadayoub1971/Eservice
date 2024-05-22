@@ -4,3 +4,13 @@
 ul li {
     color : red;
 }
+
+
+.thead-dark {
+    background-color: #343a40; /* Change the header background color */
+    color: #ffffff; /* Change the header text color */
+}
+
+.table-hover tbody tr:hover {
+    background-color: #f8f9fa; /* Change the hover row background color */
+}

@@ -94,6 +94,12 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
 
         });
 
+        Route::group(['prefix' => 'professeur/modules'], function () {
+            Route::get('/', [App\Http\Controllers\ProfesseurController::class, 'index'])->name('professeur.modules.index');
+
+
+        });
+
 
 
 
