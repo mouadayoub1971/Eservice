@@ -18,8 +18,12 @@ return new class extends Migration
             $table->time('start_time');
             $table->time('end_time');
             $table->bigInteger('module_filier_id',false,true);
+            $table->bigInteger('filier_id',false,true);
+            $table->bigInteger('classe_id',false,true);
             $table->timestamps();
             $table->foreign('module_filier_id')->references('id')->on('module_filiers');
+            $table->foreign('filier_id')->references('id')->on('filiers');
+            $table->foreign('classe_id')->references('id')->on('classes');
         });
     }
 

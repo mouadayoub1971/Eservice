@@ -136,12 +136,15 @@
             <tr>
                 <td class="align-middle">08:00 - 10:00</td>
                 <td>
-
                     @foreach($timeTable as $time)
                         @if( $time->day=='MONDAY' && $isTimeInInterval($time->start_time,$time->end_time , '08:01:00'))
+
+                            <div class="delete_id {{$time->id}}">
                             <span class="bg-sky padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom text-white font-size16 xs-font-size13">{{$time->name}}</span>
                             <div class="margin-10px-top font-size14 fw-bold">{{$time->title}}</div>
                             <div class="font-size13 text-dark-gray">{{$time->prof}}</div>
+                            </div>
+
                         @endif
                     @endforeach
                 </td>
@@ -149,10 +152,11 @@
                     @foreach($timeTable as $time)
 
                         @if( $time->day=='TUESDAY' && $isTimeInInterval($time->start_time,$time->end_time , '08:01:00'))
+                            <div class="delete_id {{$time->id}}">
                             <span class="bg-sky padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom text-white font-size16 xs-font-size13">{{$time->name}}</span>
                             <div class="margin-10px-top font-size14 fw-bold">{{$time->title}}</div>
-
                             <div class="font-size13 text-dark-gray">{{$time->prof}}</div>
+                            </div>
                         @endif
                     @endforeach
                 </td>
@@ -160,40 +164,44 @@
                 <td>
                     @foreach($timeTable as $time)
                         @if( $time->day=='WEDNESDAY' && $isTimeInInterval($time->start_time,$time->end_time , '08:01:00'))
+                            <div class="delete_id {{$time->id}}">
                             <span class="bg-sky padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom text-white font-size16 xs-font-size13">{{$time->name}}</span>
                             <div class="margin-10px-top font-size14 fw-bold">{{$time->title}}</div>
-
                             <div class="font-size13 text-dark-gray">{{$time->prof}}</div>
+                            </div>
                         @endif
                     @endforeach
                 </td>
                 <td>
                     @foreach($timeTable as $time)
                         @if( $time->day=='THURSDAY' && $isTimeInInterval($time->start_time,$time->end_time , '08:01:00'))
+                            <div class="delete_id {{$time->id}}">
                             <span class="bg-sky padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom text-white font-size16 xs-font-size13">{{$time->name}}</span>
                             <div class="margin-10px-top font-size14 fw-bold">{{$time->title}}</div>
-
                             <div class="font-size13 text-dark-gray">{{$time->prof}}</div>
+                            </div>
                         @endif
                     @endforeach
                 </td>
                 <td>
                     @foreach($timeTable as $time)
                         @if( $time->day=='FRIDAY' && $isTimeInInterval($time->start_time,$time->end_time , '08:01:00'))
+                            <div class="delete_id {{$time->id}}">
                             <span class="bg-sky padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom text-white font-size16 xs-font-size13">{{$time->name}}</span>
                             <div class="margin-10px-top font-size14 fw-bold">{{$time->title}}</div>
-
                             <div class="font-size13 text-dark-gray">{{$time->prof}}</div>
+                            </div>
                         @endif
                     @endforeach
                 </td>
                 <td>
                     @foreach($timeTable as $time)
                         @if( $time->day=='SATURDAY' && $isTimeInInterval($time->start_time,$time->end_time , '08:01:00'))
+                            <div class="delete_id {{$time->id}}">
                             <span class="bg-sky padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom text-white font-size16 xs-font-size13">{{$time->name}}</span>
                             <div class="margin-10px-top font-size14 fw-bold">{{$time->title}}</div>
-
                             <div class="font-size13 text-dark-gray">{{$time->prof}}</div>
+                            </div>
                         @endif
                     @endforeach
                 </td>
@@ -207,9 +215,11 @@
 
                     @foreach($timeTable as $time)
                         @if( $time->day=='MONDAY' && $isTimeInInterval($time->start_time,$time->end_time , '10:01:00'))
+                            <div class="delete_id {{$time->id}}">
                             <span class="bg-sky padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom text-white font-size16 xs-font-size13">{{$time->name}}</span>
                             <div class="margin-10px-top font-size14 fw-bold">{{$time->title}}</div>
                             <div class="font-size13 text-dark-gray">{{$time->prof}}</div>
+                            </div>
                         @endif
                     @endforeach
                 </td>
@@ -217,9 +227,11 @@
                     @foreach($timeTable as $time)
 
                         @if( $time->day=='TUESDAY' && $isTimeInInterval($time->start_time,$time->end_time , '10:01:00'))
+                            <div class="delete_id {{$time->id}}">
                             <span class="bg-sky padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom text-white font-size16 xs-font-size13">{{$time->name}}</span>
                             <div class="margin-10px-top font-size14 fw-bold">{{$time->title}}</div>
                             <div class="font-size13 text-dark-gray">{{$time->prof}}</div>
+                            </div>
                         @endif
                     @endforeach
                 </td>
@@ -227,36 +239,44 @@
                 <td>
                     @foreach($timeTable as $time)
                         @if( $time->day=='WEDNESDAY' && $isTimeInInterval($time->start_time,$time->end_time , '10:01:00'))
+                            <div class="delete_id {{$time->id}}">
                             <span class="bg-sky padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom text-white font-size16 xs-font-size13">{{$time->name}}</span>
                             <div class="margin-10px-top font-size14 fw-bold">{{$time->title}}</div>
                             <div class="font-size13 text-dark-gray">{{$time->prof}}</div>
+                            </div>
                         @endif
                     @endforeach
                 </td>
                 <td>
                     @foreach($timeTable as $time)
                         @if( $time->day=='THURSDAY' && $isTimeInInterval($time->start_time,$time->end_time , '10:01:00'))
+                            <div class="delete_id {{$time->id}}">
                             <span class="bg-sky padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom text-white font-size16 xs-font-size13">{{$time->name}}</span>
                             <div class="margin-10px-top font-size14 fw-bold">{{$time->title}}</div>
                             <div class="font-size13 text-dark-gray">{{$time->prof}}</div>
+                            </div>
                         @endif
                     @endforeach
                 </td>
                 <td>
                     @foreach($timeTable as $time)
                         @if( $time->day=='FRIDAY' && $isTimeInInterval($time->start_time,$time->end_time , '10:01:00'))
+                            <div class="delete_id {{$time->id}}">
                             <span class="bg-sky padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom text-white font-size16 xs-font-size13">{{$time->name}}</span>
                             <div class="margin-10px-top font-size14 fw-bold">{{$time->title}}</div>
                             <div class="font-size13 text-dark-gray">{{$time->prof}}</div>
+                            </div>
                         @endif
                     @endforeach
                 </td>
                 <td>
                     @foreach($timeTable as $time)
                         @if( $time->day=='SATURDAY' && $isTimeInInterval($time->start_time,$time->end_time , '10:01:00'))
+                            <div class="delete_id {{$time->id}}">
                             <span class="bg-sky padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom text-white font-size16 xs-font-size13">{{$time->name}}</span>
                             <div class="margin-10px-top font-size14 fw-bold">{{$time->title}}</div>
                             <div class="font-size13 text-dark-gray">{{$time->prof}}</div>
+                            </div>
                         @endif
                     @endforeach
                 </td>
@@ -268,9 +288,11 @@
 
                     @foreach($timeTable as $time)
                         @if( $time->day=='MONDAY' && $isTimeInInterval($time->start_time,$time->end_time , '14:01:00'))
+                            <div class="delete_id {{$time->id}}">
                             <span class="bg-sky padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom text-white font-size16 xs-font-size13">{{$time->name}}</span>
                             <div class="margin-10px-top font-size14 fw-bold">{{$time->title}}</div>
                             <div class="font-size13 text-dark-gray">{{$time->prof}}</div>
+                            </div>
                         @endif
                     @endforeach
                 </td>
@@ -278,9 +300,11 @@
                     @foreach($timeTable as $time)
 
                         @if( $time->day=='TUESDAY' && $isTimeInInterval($time->start_time,$time->end_time , '14:01:00'))
+                            <div class="delete_id {{$time->id}}">
                             <span class="bg-sky padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom text-white font-size16 xs-font-size13">{{$time->name}}</span>
                             <div class="margin-10px-top font-size14 fw-bold">{{$time->title}}</div>
                             <div class="font-size13 text-dark-gray">{{$time->prof}}</div>
+                            </div>
                         @endif
                     @endforeach
                 </td>
@@ -288,36 +312,44 @@
                 <td>
                     @foreach($timeTable as $time)
                         @if( $time->day=='WEDNESDAY' && $isTimeInInterval($time->start_time,$time->end_time , '14:01:00'))
+                            <div class="delete_id {{$time->id}}">
                             <span class="bg-sky padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom text-white font-size16 xs-font-size13">{{$time->name}}</span>
                             <div class="margin-10px-top font-size14 fw-bold">{{$time->title}}</div>
                             <div class="font-size13 text-dark-gray">{{$time->prof}}</div>
+                            </div>
                         @endif
                     @endforeach
                 </td>
                 <td>
                     @foreach($timeTable as $time)
                         @if( $time->day=='THURSDAY' && $isTimeInInterval($time->start_time,$time->end_time , '14:01:00'))
+                            <div class="delete_id {{$time->id}}">
                             <span class="bg-sky padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom text-white font-size16 xs-font-size13">{{$time->name}}</span>
                             <div class="margin-10px-top font-size14 fw-bold">{{$time->title}}</div>
                             <div class="font-size13 text-dark-gray">{{$time->prof}}</div>
+                            </div>
                         @endif
                     @endforeach
                 </td>
                 <td>
                     @foreach($timeTable as $time)
                         @if( $time->day=='FRIDAY' && $isTimeInInterval($time->start_time,$time->end_time , '14:01:00'))
+                            <div class="delete_id {{$time->id}}">
                             <span class="bg-sky padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom text-white font-size16 xs-font-size13">{{$time->name}}</span>
                             <div class="margin-10px-top font-size14 fw-bold">{{$time->title}}</div>
                             <div class="font-size13 text-dark-gray">{{$time->prof}}</div>
+                            </div>
                         @endif
                     @endforeach
                 </td>
                 <td>
                     @foreach($timeTable as $time)
                         @if( $time->day=='SATURDAY' && $isTimeInInterval($time->start_time,$time->end_time , '14:01:00'))
+                            <div class="delete_id {{$time->id}}">
                             <span class="bg-sky padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom text-white font-size16 xs-font-size13">{{$time->name}}</span>
                             <div class="margin-10px-top font-size14 fw-bold">{{$time->title}}</div>
                             <div class="font-size13 text-dark-gray">{{$time->prof}}</div>
+                            </div>
                         @endif
                     @endforeach
                 </td>
@@ -330,9 +362,12 @@
 
                     @foreach($timeTable as $time)
                         @if( $time->day=='MONDAY' && $isTimeInInterval($time->start_time,$time->end_time , '16:01:00'))
+
+                            <div class="delete_id {{$time->id}}">
                             <span class="bg-sky padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom text-white font-size16 xs-font-size13">{{$time->name}}</span>
                             <div class="margin-10px-top font-size14 fw-bold">{{$time->title}}</div>
                             <div class="font-size13 text-dark-gray">{{$time->prof}}</div>
+                            </div>
                         @endif
                     @endforeach
                 </td>
@@ -340,9 +375,11 @@
                     @foreach($timeTable as $time)
 
                         @if( $time->day=='TUESDAY' && $isTimeInInterval($time->start_time,$time->end_time , '16:01:00'))
+                            <div class="delete_id {{$time->id}}">
                             <span class="bg-sky padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom text-white font-size16 xs-font-size13">{{$time->name}}</span>
                             <div class="margin-10px-top font-size14 fw-bold">{{$time->title}}</div>
                             <div class="font-size13 text-dark-gray">{{$time->prof}}</div>
+                            </div>
                         @endif
                     @endforeach
                 </td>
@@ -350,36 +387,44 @@
                 <td>
                     @foreach($timeTable as $time)
                         @if( $time->day=='WEDNESDAY' && $isTimeInInterval($time->start_time,$time->end_time , '16:01:00'))
+                            <div class="delete_id {{$time->id}}">
                             <span class="bg-sky padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom text-white font-size16 xs-font-size13">{{$time->name}}</span>
                             <div class="margin-10px-top font-size14 fw-bold">{{$time->title}}</div>
                             <div class="font-size13 text-dark-gray">{{$time->prof}}</div>
+                            </div>
                         @endif
                     @endforeach
                 </td>
                 <td>
                     @foreach($timeTable as $time)
                         @if( $time->day=='THURSDAY' && $isTimeInInterval($time->start_time,$time->end_time , '16:01:00'))
+                            <div class="delete_id {{$time->id}}">
                             <span class="bg-sky padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom text-white font-size16 xs-font-size13">{{$time->name}}</span>
                             <div class="margin-10px-top font-size14 fw-bold">{{$time->title}}</div>
                             <div class="font-size13 text-dark-gray">{{$time->prof}}</div>
+                            </div>
                         @endif
                     @endforeach
                 </td>
                 <td>
                     @foreach($timeTable as $time)
                         @if( $time->day=='FRIDAY' && $isTimeInInterval($time->start_time,$time->end_time , '16:01:00'))
+                            <div class="delete_id {{$time->id}}">
                             <span class="bg-sky padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom text-white font-size16 xs-font-size13">{{$time->name}}</span>
                             <div class="margin-10px-top font-size14 fw-bold">{{$time->title}}</div>
                             <div class="font-size13 text-dark-gray">{{$time->prof}}</div>
+                            </div>
                         @endif
                     @endforeach
                 </td>
                 <td>
                     @foreach($timeTable as $time)
                         @if( $time->day=='SATURDAY' && $isTimeInInterval($time->start_time,$time->end_time , '16:01:00'))
+                            <div class="delete_id {{$time->id}}">
                             <span class="bg-sky padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom text-white font-size16 xs-font-size13">{{$time->name}}</span>
                             <div class="margin-10px-top font-size14 fw-bold">{{$time->title}}</div>
                             <div class="font-size13 text-dark-gray">{{$time->prof}}</div>
+                            </div>
                         @endif
                     @endforeach
                 </td>
@@ -388,5 +433,42 @@
 
             </tbody>
         </table>
+    </div>
+</div>
+
+
+<?php
+
+$rand_id = rand(1,10000);
+
+?>
+    <button type="button" aria-hidden="true" style="display: none" class="btn btn-success margin-10px-top me-2  modelButton" data-bs-toggle="modal" data-bs-target="#{{$rand_id}}">
+        Edit
+    </button>
+
+
+<!-- Modal -->
+<div class="modal fade" id="{{$rand_id}}"  data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered " >
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="staticBackdropLabel">Alert</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+
+
+                <div class="modal-body text-center">
+
+                    <div class=" text-center">
+                        Are You Sure
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-danger deleteconfirm" >delete</button>
+                </div>
+
+        </div>
     </div>
 </div>

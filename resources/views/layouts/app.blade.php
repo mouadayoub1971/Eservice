@@ -28,17 +28,17 @@
     <div class="sidebar sidebar-dark sidebar-fixed" id="sidebar">
         <div class="sidebar-brand d-none d-md-flex">
             <svg class="sidebar-brand-full" width="118" height="46" alt="CoreUI Logo">
-                 <use xlink:href="{{ asset('icons/brand.svg#full') }}"></use>
+                 <use xlink:href="{{ asset('icons/cMFyTi01.svg#full') }}"></use>
             </svg>
             <svg class="sidebar-brand-narrow" width="46" height="46" alt="CoreUI Logo">
-                <use xlink:href="{{ asset('icons/brand.svg#signet') }}"></use>
+                <use xlink:href="{{ asset('icons/cMFyTi01.svg#signet') }}"></use>
             </svg>
         </div>
         @include($name . '.navigation')
         {{-- @yield('navigation') --}}
         <button class="sidebar-toggler" type="button" data-coreui-toggle="unfoldable"></button>
     </div>
-    <div class="wrapper d-flex flex-column min-vh-100 bg-light">
+    <div class="wrapper d-flex flex-column min-vh-100 ">
         <!-- Header block -->
         @include('layouts.includes.header')
 

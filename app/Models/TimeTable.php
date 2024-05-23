@@ -15,5 +15,7 @@ class TimeTable extends Model
         'end_time',
         'module_filier_id',
         'day',
+        'filier_id',
+        'classe_id'
     ];
 }

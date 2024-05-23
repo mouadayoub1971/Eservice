@@ -21,17 +21,21 @@ class TimeTableSeeder extends Seeder
         $times = [[
             'title' =>'cour',
             'day'=>'MONDAY',
+            'filier_id' =>'1',
             'start_time'=>'08:00:00',
             'end_time'=>'10:00:00',
             'module_filier_id'=>"1",
+            'classe_id'=>"3",
 
         ],
             [
             'title' =>'cour',
+            'filier_id' =>'1',
                 'day'=>'WEDNESDAY',
-            'start_time'=>'09:00:00',
+            'start_time'=>'08:00:00',
             'end_time'=>'12:00:00',
             'module_filier_id'=>"2",
+                'classe_id'=>"3",
 
         ]
         ];

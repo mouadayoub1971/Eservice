@@ -85,16 +85,11 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
             Route::post('/save', [App\Http\Controllers\Cordinateur_filierController::class, 'save_module'])->name('cordinateur_filier.Module.save');
             Route::get('/download', [App\Http\Controllers\Cordinateur_filierController::class, 'download_module'])->name('cordinateur_filier.Module.download');
 
-           /*Route::get('/modules/{id}', [App\Http\Controllers\chef_departemeneController::class, 'show_modules'])->name('chef_departement.filiers.modules');
-
-            Route::group(['prefix' => 'module'], function () {
-                Route::get('/create/{filier_id}', [App\Http\Controllers\chef_departemeneController::class, 'create_module'])->name('chef_departement.module.create');
-                Route::post('/create/{filier_id}', [App\Http\Controllers\chef_departemeneController::class, 'store_module'])->name('chef_departement.module.store');
-                Route::delete('/delete/{filier_id}{module_id}{prof_id}', [App\Http\Controllers\chef_departemeneController::class, 'delete_module'])->name('chef_departement.filiers.module.delete');
-            });*/
         });
         Route::group(['prefix' => 'cordinateur_filier/TimeTable'], function () {
             Route::get('/{classe?}', [App\Http\Controllers\Cordinateur_filierController::class, 'index_TimeTable'])->name('cordinateur_filier.TimeTable.index');
+            Route::post('/{classe?}', [App\Http\Controllers\Cordinateur_filierController::class, 'edit_TimeTable'])->name('cordinateur_filier.TimeTable.edit');
+            Route::get('/{timetable_id?}/delete', [App\Http\Controllers\Cordinateur_filierController::class, 'delete_TimeTable'])->name('cordinateur_filier.TimeTable.delete');
             Route::get('/download/{classe?}', [App\Http\Controllers\Cordinateur_filierController::class, 'download_TimeTable'])->name('cordinateur_filier.TimeTable.download');
 
         });
