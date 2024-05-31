@@ -48,6 +48,42 @@
 
             @include('cordinnateur_filier.TimeTable.TimeTableView')
 
+            <?php
+
+            $rand_id = rand(1,2);
+
+            ?>
+            <button type="button" aria-hidden="true" style="display: none" class="btn btn-success margin-10px-top me-2  modelButton" data-bs-toggle="modal" data-bs-target="#{{$rand_id}}">
+                Edit
+            </button>
+
+
+            <!-- Modal -->
+            <div class="modal fade" id="{{$rand_id}}"  data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered " >
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="staticBackdropLabel">Alert</h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+
+
+                        <div class="modal-body text-center">
+
+                            <div class=" text-center">
+                                Are You Sure
+                            </div>
+
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-danger deleteconfirm" >delete</button>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
             <a href="{{Route('cordinateur_filier.TimeTable.download',['classe'=>$classe_id])}}" class="btn btn-outline-primary margin-10px-top me-2"><i
                     class="fas fa-download"></i> Download</a>
 
@@ -55,7 +91,7 @@
 
             <?php
 
-                $rand_id = rand(1,10000);
+                $rand_id = rand(3,10000);
             ?>
 
             @if($classe_id != null)
@@ -146,6 +182,7 @@
     </div>
 
     <script>
+
         document.addEventListener('DOMContentLoaded', (event) => {
             const firstSelect = document.getElementById('inputState1');
             const secondSelect = document.getElementById('inputState2');

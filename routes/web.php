@@ -48,6 +48,11 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
          * Home Routes
          */
         Route::get('dashboard', [App\Http\Controllers\HomeController::class, 'index'])->name('dashboard');
+
+        Route::group(['prefix' => 'profile'], function () {
+            Route::get('/{id}', [App\Http\Controllers\ProfileController::class, 'Profile_Index'])->name('profile.index');
+            Route::post('/{id}', [App\Http\Controllers\ProfileController::class, 'Profile_save'])->name('profile.index');
+        });
         /**
          * chef_departement
          */
@@ -60,20 +65,18 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
                 Route::post('/create/{filier_id}', [App\Http\Controllers\chef_departemeneController::class, 'store_module'])->name('chef_departement.module.store');
                 Route::delete('/delete/{filier_id}{module_id}{prof_id?}', [App\Http\Controllers\chef_departemeneController::class, 'delete_module'])->name('chef_departement.filiers.module.delete');
             });
+            Route::get('/timetable', [App\Http\Controllers\chef_departemeneController::class, 'index_TimeTable'])->name('chef_departement.filiers.timetable');
+            Route::get('/timetable/{classe_id?}&{filier_id?}', [App\Http\Controllers\chef_departemeneController::class, 'download_TimeTable'])->name('chef_departement.filiers.timetable.download');
+
+
         });
 
+        Route::group(['prefix' => 'chef_departement/profs'], function () {
+            Route::get('/', [App\Http\Controllers\chef_departemeneController::class, 'ProfIndex'])->name('chef_departemenet.profs.index');
+            Route::post('/', [App\Http\Controllers\chef_departemeneController::class, 'profStore'])->name('chef_departemenet.profs.store');
+            Route::delete('/{prof}', [App\Http\Controllers\chef_departemeneController::class, 'profDestroy'])->name('chef_departemenet.profs.destroy');
 
-        /**
-         * khchi routes dyalek hna  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-         */
-
-
-
-
-
-
-
-
+        });
 
          /**
          * cordinateur_filier
@@ -94,9 +97,19 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
 
         });
 
-        Route::group(['prefix' => 'professeur/modules'], function () {
-            Route::get('/', [App\Http\Controllers\ProfesseurController::class, 'index'])->name('professeur.modules.index');
 
+
+
+
+        //professeur
+
+        Route::group(['prefix' => 'professeur/modules'], function () {
+            Route::get('/', [App\Http\Controllers\ProfesseurController::class, 'modules_index'])->name('professeur.modules.index');
+
+        });
+        Route::group(['prefix' => 'professeur/Scores'], function () {
+            Route::get('/', [App\Http\Controllers\ProfesseurController::class, 'scores_index'])->name('professeur.scores.index');
+            Route::post('/save/{module_id?}', [App\Http\Controllers\ProfesseurController::class, 'scores_save'])->name('professeur.scores.save');
 
         });
 
@@ -129,15 +142,5 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
 
 
 
-// profs route
-Route::group(['prefix' => 'chef_departement/profs'], function () {
-    Route::get('/', [App\Http\Controllers\chef_departemeneController::class, 'ProfIndex'])->name('chef_departemenet.profs.index');
-    Route::post('/', [App\Http\Controllers\chef_departemeneController::class, 'profStore'])->name('chef_departemenet.profs.store');
-    Route::delete('/{prof}', [App\Http\Controllers\chef_departemeneController::class, 'profDestroy'])->name('chef_departemenet.profs.destroy');
-    // Route::get('/create', 'UsersController@create')->name('users.create');
-    // Route::post('/create', 'UsersController@store')->name('users.store');
-    // Route::get('/{user}/show', 'UsersController@show')->name('users.show');
-    // Route::get('/{user}/edit', 'UsersController@edit')->name('users.edit');
-    // Route::patch('/{user}/update', 'UsersController@update')->name('users.update');
-    // Route::delete('/{user}/delete', 'UsersController@destroy')->name('users.destroy');
-});
+
+

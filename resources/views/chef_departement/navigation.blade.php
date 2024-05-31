@@ -1,3 +1,6 @@
+
+
+
 <ul class="sidebar-nav" data-coreui="navigation" data-simplebar>
     <li class="nav-item">
         <a class="nav-link" href="{{ route('dashboard') }}">
@@ -8,22 +11,51 @@
         </a>
     </li>
 
-    <li class="nav-item">
-        <a class="nav-link {{ request()->is('users*') ? 'active' : '' }}"
-            href="{{ route('chef_departement.filiers.index') }}">
+    <li class="nav-group" aria-expanded="true">
+        <a class="nav-link nav-group-toggle" href="#">
             <svg class="nav-icon">
-                <use xlink:href="{{ asset('icons/coreui.svg#cil-user') }}"></use>
+                <use xlink:href="{{ asset('icons/coreui.svg#cil-star') }}"></use>
             </svg>
-            {{ __('Filiers') }}
+            filiers
         </a>
+        <ul class="nav-group-items">
+            <li class="nav-item py-2">
+                <a class="nav-link"
+                   href="{{ route('chef_departement.filiers.index') }}" target="_top"  >
+
+                    <div class="nav-icon p-0"  style="margin-top: -10px">
+                        <i class="fa-solid fa-id-card"></i>
+                    </div>
+                    {{ __('Filier') }}
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link"
+                   href="{{ route('chef_departement.filiers.timetable') }}" target="_top"  >
+
+                    <div class="nav-icon p-0"  style="margin-top: -10px">
+                        <i class="fa-solid fa-id-card"></i>
+                    </div>
+                    {{ __('TimeTable') }}
+                </a>
+            </li>
+        </ul>
     </li>
 
     <li class="nav-item">
         <a class="nav-link {{ request()->is('roles*') ? 'active' : '' }}" href="{{ route('chef_departemenet.profs.index') }}">
             <svg class="nav-icon">
-                <use xlink:href="{{ asset('icons/coreui.svg#cil-zoom') }}"></use>
+                <use xlink:href="{{ asset('icons/coreui.svg#cil-microphone') }}"></use>
             </svg>
             {{ __('teachers') }}
+        </a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link " href="{{route('professeur.scores.index')}}">
+            <svg class="nav-icon">
+                <use xlink:href="{{ asset('icons/coreui.svg#cil-zoom') }}"></use>
+            </svg>
+            {{ __('scores') }}
         </a>
     </li>
 

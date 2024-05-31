@@ -54,17 +54,17 @@ class LoginController extends Controller
             return redirect(RouteServiceProvider::HOME);
         }
 
-        return back();
+        return redirect()->back()->with('error',"qsd");
     }
     public function logout()
     {
 
         Auth::logout();
-        return View('auth.login');
+        return redirect('login');
     }
 
     // public function username()
-    // {   
+    // {
     //     return 'email';
     // }
 }

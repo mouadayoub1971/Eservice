@@ -4,39 +4,28 @@ namespace App\Http\Controllers;
 
 use App\Exports\moduleExport;
 use App\Models\classe;
-use App\Models\Module;
+use App\Models\Departement;
+use App\Models\Filier;
 use App\Models\Module_filier;
 use App\Models\Module_prof;
 use App\Models\TimeTable;
 use App\Models\User;
 use App\Services\ModuleServices;
+use App\Services\TimeInterval;
+use App\Services\TimeTableServices;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+
 use Maatwebsite\Excel\Facades\Excel;
-use Carbon\Carbon;
+
 
 class Cordinateur_filierController extends Controller
 {
     //
 
-    public function isTimeInInterval($startTime, $endTime, $checkTime)
-    {
-        // Parse the times using Carbon
-        $start = Carbon::parse($startTime);
-        $end = Carbon::parse($endTime);
-        $timeToCheck = Carbon::parse($checkTime);
 
-        // Check if the time to check is within the interval
-        if ($start->greaterThan($end)) {
-            // Interval spans midnight
-            return $timeToCheck->between($start, Carbon::parse('23:59:59')) ||
-                $timeToCheck->between(Carbon::parse('00:00:00'), $end);
-        }
-
-        return $timeToCheck->between($start, $end);
-    }
 
     public $message = '';
     public  $ModuleServices;
@@ -50,7 +39,7 @@ class Cordinateur_filierController extends Controller
 
 
         $classes = classe::where('departement_id', Auth::user()->departement_id)->where('filier_id',Auth::user()->filier_id )->get();
-        $profs = User::where('role_id', "2")->where('departement_id',Auth::user()->departement_id)->get();
+        $profs = User::whereIn('role_id', ["2","3","4"])->where('departement_id',Auth::user()->departement_id)->get();
 
         $module_lists = DB::table('modules')
             ->join('module_filiers', "modules.id", '=', 'module_filiers.module_id')
@@ -126,37 +115,16 @@ class Cordinateur_filierController extends Controller
 
 
 
+             $TimeTableSrvices =  new TimeTableServices();
 
-
-
-        $timeTable = DB::table('time_tables')
-            ->join('module_filiers','module_filiers.id','time_tables.module_filier_id')
-            ->join('module_profs','module_filiers.module_id','module_profs.module_id')
-            ->join('modules','modules.id','module_filiers.module_id')
-            ->join('users','users.id','module_profs.prof_id')
-                ->join('classes','classes.id','module_filiers.classe_id')
-                ->select(
-                'time_tables.id as id',
-                'modules.name as name',
-                'users.name as prof',
-                'time_tables.start_time as start_time',
-                'time_tables.day as day',
-                'time_tables.title as title',
-                'time_tables.end_time as end_time',
-
-            )->where('module_filiers.filier_id',Auth::user()->filier_id)
-            ->where("classes.id",$classe_id)
-            ->get();
-
-
-
-
+             $timeTable = $TimeTableSrvices->getTimeTable($classe_id,Auth::user()->filier_id);
+              $isTimeInInterval = new TimeInterval();
 
         return View('cordinnateur_filier.TimeTable.index'
             ,[
                 'name'=>'cordinnateur_filier',
                 'timeTable'=>$timeTable,
-                'isTimeInInterval' => [$this, 'isTimeInInterval'],
+                'isTimeInInterval' => $isTimeInInterval,
                 "classes"=>$classes,
                 'classe_id'=>$classe_id,
                 'modules' =>$modules
@@ -184,14 +152,15 @@ class Cordinateur_filierController extends Controller
             ->get();
 
 
+        $isTimeInInterval = new TimeInterval();
 
     $data = [
         'timeTable'=>$timeTable,
-        'isTimeInInterval' => [$this, 'isTimeInInterval']
+        'isTimeInInterval' =>   $isTimeInInterval
     ];
     $pdf = Pdf::loadView('cordinnateur_filier.TimeTable.TimeTableView', $data);
 
-    return $pdf->download('document.pdf');
+    return $pdf->download('TimeTable.pdf');
 
 
 
@@ -258,5 +227,7 @@ public function delete_TimeTable($timetable_id)
 
 
 }
+
+
 }
 

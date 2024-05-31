@@ -16,11 +16,32 @@
     </title>
     <meta name="theme-color" content="#ffffff">
 
+    <script src="https://jsuites.net/v4/jsuites.js"></script>
+
+    <link rel="stylesheet" href="https://jsuites.net/v4/jsuites.css" type="text/css" />
+
     @stack('before-styles')
     @vite('resources/sass/app.scss')
+    @vite('')
+
     @stack('after-styles')
 
     <link rel="icon" type="image/png" href="{{ asset('img/ensah.png') }}">
+
+    <style>
+        .nav-group-items li {
+            padding-left: 10px;
+        }
+        .sidebar-nav{
+            background-color: #0A68FF;
+        }.sidebar-nav a {
+             color: black;
+             font-weight: bold;
+         }
+         .sidebar{
+             background-color: #0A68FF;
+         }
+    </style>
 
 </head>
 
@@ -45,12 +66,12 @@
         <!-- / Header block -->
 
         <div class="body flex-grow-1 px-3">
-            <div class="container-lg">
+
                 <!-- Errors block -->
                 @include('layouts.includes.errors')
                 <!-- / Errors block -->
-                <div class="mb-4">@yield('content')</div>
-            </div>
+               @yield('content')
+
         </div>
 
         <!-- Footer block -->
@@ -63,6 +84,7 @@
 
     <script src="{{ asset('js/jquery.min.js') }}"></script>
     <script src="{{ asset('js/coreui.bundle.min.js') }}"></script>
+    <script src="{{ mix('js/app.js') }}"></script>
     @vite('resources/js/app.js')
 
     @stack('after-scripts')

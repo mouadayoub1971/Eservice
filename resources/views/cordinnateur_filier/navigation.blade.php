@@ -28,5 +28,13 @@
             {{ __('Time Table') }}
         </a>
     </li>
+    <li class="nav-item">
+        <a class="nav-link " href="{{route('professeur.scores.index')}}">
+            <svg class="nav-icon">
+                <use xlink:href="{{ asset('icons/coreui.svg#cil-zoom') }}"></use>
+            </svg>
+            {{ __('scores') }}
+        </a>
+    </li>
 
 </ul>

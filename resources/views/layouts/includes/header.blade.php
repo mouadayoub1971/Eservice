@@ -15,17 +15,18 @@
 
         </ul>
         @auth
-            <ul class="header-nav ms-3">
+            <div style="display: flex ; align-items: center " >
+            <ul class="header-nav ">
                 <li class="nav-item dropdown">
                     <a class="nav-link py-0" data-coreui-toggle="dropdown" href="#" role="button"
                         aria-haspopup="true" aria-expanded="false">
-                        <div class="avatar">
-                            <img class="avatar-img" src="{{ asset('img/default-avatar.jpg') }}"
+                        <div class="avatar" style="width: 45px">
+                            <img class="avatar-img" src="{{  url(Auth::user()->avatar) ? url(Auth::user()->avatar) : asset('img/default-avatar.jpg') }}"
                                 alt="{{ Auth::user()->email }}">
                         </div>
                     </a>
                     <div class="dropdown-menu dropdown-menu-end pt-0">
-                        <a class="dropdown-item" href="{{ route('users.show', Auth::user()->id) }}">
+                        <a class="dropdown-item" href="{{ route("profile.index",Auth::user()->id)}}">
                             <svg class="icon me-2">
                                 <use xlink:href="{{ asset('icons/coreui.svg#cil-user') }}"></use>
                             </svg>
@@ -42,6 +43,8 @@
                     </div>
                 </li>
             </ul>
+            <h5 style="margin: 0">{{Auth::user()->name}}</h5>
+            </div>
         @endauth
         @if (trim($__env->yieldContent('breadcrumbs')))
             <div class="header-divider"></div>

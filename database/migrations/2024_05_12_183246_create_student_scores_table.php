@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->bigInteger('student_id',false,true);
             $table->bigInteger('module_id',false,true);
-            $table->float('score');
+            $table->float('score')->nullable();
             $table->timestamps();
             $table->foreign('module_id')->references('id')->on('modules');
             $table->foreign('student_id')->references('id')->on('users');

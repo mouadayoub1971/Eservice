@@ -4,11 +4,24 @@ namespace App\Http\Controllers;
 
 use App\Models\Module_filier;
 use App\Models\Module_prof;
+use App\Models\Role;
+use App\Models\student_score;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Request as FacadesRequest;
 
 class ProfesseurController extends Controller
 {
-    public function index(){
+
+
+
+    public  function getRole(){
+        return Role::find(Auth::user()->role_id);
+    }
+
+
+    public function modules_index(){
 
     $moduleEnSignes = Module_prof::where('prof_id', auth()->user()->id)
     ->join('modules', 'module_profs.module_id', '=', 'modules.id')
@@ -37,6 +50,78 @@ class ProfesseurController extends Controller
     )
     ->orderByRaw('FIELD(UPPER(time_tables.day), "MONDAY", "TUESDAY", "WEDNESDAY", "THURSDAY", "FRIDAY", "SATURDAY", "SUNDAY")')
     ->get();
-        return view('professeur.modules.index')->with('modules', $moduleEnSignes)->with('name', 'professeur');
+        return view('professeur.modules.index')->with('modules', $moduleEnSignes)->with('name', $this->getRole()->name);
     }
+
+
+
+    public  function scores_index(){
+        $modeles = Module_prof::where('prof_id',Auth::user()->id)
+            ->join('modules','modules.id' , 'module_profs.module_id')
+            ->select(
+                'modules.id as id',
+                'modules.name as module_name'
+            )->get();
+
+        $students = [];
+        if(!empty(FacadesRequest::get('module'))) {
+
+            $scores_table = DB::table('student_scores')->where('student_scores.module_id' , FacadesRequest::get('module'))
+                ->select('student_scores.student_id','student_scores.score');
+
+                  $students = DB::table('modules')->where('modules.id', FacadesRequest::get('module'))
+                 ->join('module_filiers', 'module_filiers.module_id', 'modules.id')
+                    ->join('users', 'users.filier_id', 'module_filiers.filier_id')
+                      ->leftJoinSub( $scores_table, 'student_scores', function ($join) {
+                          $join->on('student_scores.student_id', '=', 'users.id');
+                      })
+                      ->select(
+                          'users.id as id',
+                                    'users.name as name',
+                                     'student_scores.score as score'
+
+                            )->where('users.role_id', '1')
+                                       ->get();
+
+
+
+        }
+
+
+        return view('professeur.scores.index')
+            ->with('name', $this->getRole()->name)
+            ->with('modules', $modeles)
+            ->with('students',$students);
+
+    }
+
+
+    public function scores_save($module_id , Request $request){
+        $scores = $request->all();
+        $scores = array_slice($scores, 1, null, true);
+
+        foreach ($scores as $student_id => $score){
+            $score_table = student_score::where('student_id' ,$student_id )->where('module_id',$module_id)->get();
+
+            if($score_table->count()==0){
+               $resault=  student_score::create([
+                    'student_id' => $student_id,
+                    'module_id'=>$module_id,
+                    'score'=> $score,
+
+                ]);
+            }
+            else{
+                $score_table[0]->update([
+                    'score'=> $score
+                ]);
+            }
+
+        }
+
+        return redirect()->back();
+
+    }
+
+
 }

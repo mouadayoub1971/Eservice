@@ -19,40 +19,12 @@
     </li>
 
     <li class="nav-item">
-        <a class="nav-link {{ request()->is('roles*') ? 'active' : '' }}" href="#">
+        <a class="nav-link " href="{{route('professeur.scores.index')}}">
             <svg class="nav-icon">
                 <use xlink:href="{{ asset('icons/coreui.svg#cil-zoom') }}"></use>
             </svg>
-            {{ __('teachers') }}
+            {{ __('scores') }}
         </a>
     </li>
 
-    <li class="nav-item">
-        <a class="nav-link {{ request()->is('permissions*') ? 'active' : '' }}"
-            href="#">
-            <svg class="nav-icon">
-                <use xlink:href="{{ asset('icons/coreui.svg#cil-room') }}"></use>
-            </svg>
-            {{ __('Permissions') }}
-        </a>
-    </li>
-
-    <li class="nav-group" aria-expanded="false">
-        <a class="nav-link nav-group-toggle" href="#">
-            <svg class="nav-icon">
-                <use xlink:href="{{ asset('icons/coreui.svg#cil-star') }}"></use>
-            </svg>
-            Two-level menu
-        </a>
-        <ul class="nav-group-items" style="height: 0px;">
-            <li class="nav-item">
-                <a class="nav-link" href="#" target="_top">
-                    <svg class="nav-icon">
-                        <use xlink:href="{{ asset('icons/coreui.svg#cil-bug') }}"></use>
-                    </svg>
-                    Child menu
-                </a>
-            </li>
-        </ul>
-    </li>
 </ul>

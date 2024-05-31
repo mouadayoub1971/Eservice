@@ -114,6 +114,18 @@ class UserSeeder extends Seeder
                 'created_at'        => Carbon::now(),
                 'updated_at'        => Carbon::now(),
             ],
+            [
+                'name'              => 'zaky Admin',
+                'email'             => 'zaky@admin.com',
+                'password'          => Hash::make('secret'),
+                'role_id' => '4',
+                'departement_id' => '1',
+                'filier_id'=>"2",
+                'avatar'            => 'img/default-avatar.jpg',
+                'gender'            => $faker->randomElement(['Male', 'Female', 'Other']),
+                'created_at'        => Carbon::now(),
+                'updated_at'        => Carbon::now(),
+            ],
 
 =======
             // 5 prof
@@ -403,7 +415,7 @@ class UserSeeder extends Seeder
                 'name' => 'chef_departement'
             ],
             [
-                'name' => 'cordinateur_filier'
+                'name' => 'cordinnateur_filier'
             ],
         ];
 
