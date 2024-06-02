@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('title')
-    Student Scores
+    Modules
 @endsection
 
 @section('content')
@@ -11,44 +11,18 @@
                 <div class="row">
                     <div class="col-sm-12">
                         <div class="page-sub-header">
-                            <h3 class="page-title">Student Scores</h3>
-
+                            <h3 class="page-title">Modules</h3>
+                            {{-- <ul class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="#">Modules</a></li>
+                                <li class="breadcrumb-item active">All Students</li>
+                            </ul> --}}
                         </div>
                     </div>
                 </div>
             </div>
+            {{-- message --}}
+            {{-- {!! Toastr::message() !!} --}}
 
-            <form action="">
-                <div class="student-group-form p-4">
-                    <div class="row">
-
-                        <div class="col-lg-3 col-md-6">
-
-                            <div class="form-group">
-                                <select class="form-control" id="exampleFormControlSelect1" name="module"  >
-                                    @if (!empty(Request::get('module')))
-                                        <option value="">shose module ...</option>
-                                        <option selected hidden>{{ Request::get('module') }}</option>
-                                    @else
-                                        <option selected  value="">shose module ...</option>
-                                    @endif
-                                    @foreach ($modules as $key => $module)
-                                        <option value="{{ $module->id }}">{{ $module->module_name }}</option>
-
-                                    @endforeach
-                                </select>
-                            </div>
-
-
-                        </div>
-                        <div class="col-lg-2">
-                            <div class="search-student-btn">
-                                <button type="submit" class="btn btn-primary">Search</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </form>
             <div class="row">
                 <div class="col-sm-12">
                     <div class="card card-table comman-shadow">
@@ -66,18 +40,14 @@
                                             {{ __('teachers') }}
                                         </a>--}}
 
-                                        <a href="{{--{{Route('cordinateur_filier.Module.download',['classe'=>Request::get('classe')])}}--}}" class="btn btn-outline-primary me-2"><i
+                                        <a href="#" class="btn btn-outline-primary me-2"><i
                                                 class="fas fa-download"></i> Download</a>
-
-
 
                                     </div>
                                 </div>
                             </div>
 
                             <div class="table-responsive">
-                                <form action="{{Route("professeur.scores.save" , ['module_id'=>Request::get('module') ])}}"  method="POST">
-                                    @csrf
                                 <table
                                     class="table border-0 star-student table-hover table-center mb-0 datatable table-striped">
                                     <thead class="student-thread">
@@ -89,46 +59,29 @@
                                             </th>
                                             <th>ID</th>
                                             <th>Name</th>
-                                            <th>Score</th>
-
+                                            <th>Professeur</th>
 
                                         </tr>
                                     </thead>
                                     <tbody>
-
-
-
-
-                                        @foreach ($students as $key => $student)
+                                        @foreach ($module_lists as $key => $module_list)
                                             <tr class=" fw-bolder">
-
                                                 <td>
                                                     <div class="form-check check-tables">
                                                         <input class="form-check-input checkbox_elements" type="checkbox" value="something">
                                                     </div>
                                                 </td>
 
-                                                <td class="id">{{ $student->id }}</td>
+                                                <td class="id">{{ $module_list->id }}</td>
 
-                                                <td>{{ $student->name }}</td>
-                                                <td>
-                                                    <input type="number" max = 20   name="{{$student->id}}" value="{{$student->score}}">
-                                                </td>
+                                                <td>{{ $module_list->name }}</td>
+                                                <td>{{ $module_list->prof }}</td>
+
 
                                             </tr>
                                         @endforeach
-
-
-
-
-
                                     </tbody>
                                 </table>
-
-                                            <button type="submit" class="btn btn-outline-success bg-success active m-4"> Save</button>
-
-                                </form>
-
                             </div>
                         </div>
                     </div>

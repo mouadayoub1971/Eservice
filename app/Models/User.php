@@ -43,7 +43,8 @@ class User extends Authenticatable
         "gender",
         'role_id',
         'departement_id',
-        'filier_id'
+        'filier_id',
+        'classe_id'
     ];
 
     /**

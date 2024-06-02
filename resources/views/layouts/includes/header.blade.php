@@ -1,3 +1,11 @@
+<style>
+    .profile:hover{
+        box-shadow: 0 7px 18px 0 rgba(0, 0, 0, -0.0), 0 16px 19px 0 rgba(0, 0, 0, 0.10);
+        padding: 2px;
+        transition: .3s;
+    }
+</style>
+
 <header class="header header-sticky mb-4">
     <div class="container-fluid">
         <button class="header-toggler px-md-0 me-md-3" type="button"
@@ -15,7 +23,7 @@
 
         </ul>
         @auth
-            <div style="display: flex ; align-items: center " >
+            <div class="profile" style="display: flex ; align-items: center " >
             <ul class="header-nav ">
                 <li class="nav-item dropdown">
                     <a class="nav-link py-0" data-coreui-toggle="dropdown" href="#" role="button"

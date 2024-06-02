@@ -16,8 +16,6 @@ class ModuleServices
                 ->where('modules.id', FacadesRequest::get('id'))
                 ->get();
 
-
-
         }
         else if (!empty(FacadesRequest::get('classe')) && empty(FacadesRequest::get('name'))) {
             $module_lists = $module_lists ->where('module_filiers.filier_id', $id)

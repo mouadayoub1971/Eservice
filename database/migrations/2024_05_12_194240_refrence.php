@@ -11,14 +11,16 @@ return new class extends Migration
      */
     public function up(): void
     {
-     
+
           Schema::table('users', function (Blueprint $table) {
             $table->bigInteger('role_id',false,true)->nullable();
             $table->bigInteger('departement_id',false,true)->nullable();
             $table->bigInteger('filier_id',false,true)->nullable();
+            $table->bigInteger('classe_id',false,true)->nullable();
             $table->foreign('role_id')->references('id')->on('roles');
             $table->foreign('departement_id')->references('id')->on('departements');
             $table->foreign('filier_id')->references('id')->on('filiers');
+            $table->foreign('classe_id')->references('id')->on('classes');
           });
     }
 

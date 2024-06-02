@@ -18,9 +18,7 @@ use Illuminate\Support\Facades\Auth;
 
 
 
-Route::get('/about', function () {
-    return view('about');
-});
+
 Route::get('/', function () {
     return redirect('/login');
 });
@@ -114,17 +112,35 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
         });
 
 
+        /**
+         * student Routes
+         */
+
+
+        Route::group(['prefix' => 'student/modules'], function () {
+            Route::get('/', [App\Http\Controllers\StudentController::class, 'modules_index'])->name('student.modules.index');
+
+        });
+        Route::group(['prefix' => 'student/Scores'], function () {
+            Route::get('/', [App\Http\Controllers\StudentController::class, 'scores_index'])->name('student.scores.index');
+
+        });
+
+        Route::group(['prefix' => 'student/TimeTable'], function () {
+            Route::get('/', [App\Http\Controllers\StudentController::class, 'index_TimeTable'])->name('student.TimeTable.index');
+
+        });
 
 
 
         /**
          * Role Routes
          */
-        Route::resource('roles', App\Http\Controllers\RolesController::class);
+      /*  Route::resource('roles', App\Http\Controllers\RolesController::class);*/
         /**
          * Permission Routes
          */
-        Route::resource('permissions', App\Http\Controllers\PermissionsController::class);
+        /*Route::resource('permissions', App\Http\Controllers\PermissionsController::class);*/
         /**
          * User Routes
          */

@@ -22,7 +22,7 @@
 
     @stack('before-styles')
     @vite('resources/sass/app.scss')
-    @vite('')
+
 
     @stack('after-styles')
 
@@ -33,14 +33,50 @@
             padding-left: 10px;
         }
         .sidebar-nav{
-            background-color: #0A68FF;
+            background-color: #505abb;
         }.sidebar-nav a {
-             color: black;
              font-weight: bold;
          }
          .sidebar{
-             background-color: #0A68FF;
+             background-color: #505abb;
+             box-shadow: 0 4px 8px 0 #505abb, 0 6px 20px 0 #505abb;
          }
+        .sidebar-brand{
+             background :  rgba(0, 0, 0, 0);;
+         }
+
+        .nav-group-items .nav-link.active{
+           color: black;
+        }
+        .nav-group-items .nav-link:hover{
+            color: #232222;
+        }
+        .nav-group-items .nav-link{
+            color: dimgray;
+        }
+        .nav-group-items .nav-link .nav-icon{
+            color: dimgray;
+        }
+        .nav-group-items .nav-link:hover .nav-icon{
+            color: #232222;
+        }
+
+
+        .nav-group-items .nav-link.active .nav-icon{
+            color: #232222;
+        }
+        .nav-group-items{
+
+            background: white;
+            border-radius: 5%;
+            width: 95%;
+            margin: auto;
+            opacity: 90%;
+        }
+
+        .page-title{
+            color : #505abb;
+        }
     </style>
 
 </head>
@@ -84,7 +120,7 @@
 
     <script src="{{ asset('js/jquery.min.js') }}"></script>
     <script src="{{ asset('js/coreui.bundle.min.js') }}"></script>
-    <script src="{{ mix('js/app.js') }}"></script>
+   {{-- <script src="{{ mix('js/app.js') }}"></script>--}}
     @vite('resources/js/app.js')
 
     @stack('after-scripts')

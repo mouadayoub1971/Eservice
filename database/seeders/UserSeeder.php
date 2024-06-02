@@ -13,8 +13,10 @@ use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Database\Seeder;
+use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Schema;
+
 
 class UserSeeder extends Seeder
 {
@@ -25,8 +27,8 @@ class UserSeeder extends Seeder
     {
         Schema::disableForeignKeyConstraints();
 
-        $faker = \Faker\Factory::create();
 
+        $faker = \Faker\Factory::create();
         // Add the master administrator, user id of 1
         $users = [
 <<<<<<< HEAD

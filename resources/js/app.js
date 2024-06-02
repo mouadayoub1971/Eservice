@@ -48,6 +48,7 @@ document.addEventListener('DOMContentLoaded', function () {
         type: 'line', // or 'bar', 'pie', etc.
         data: data,
         options: {
+            responsive: true,
             scales: {
                 y: {
                     beginAtZero: true
@@ -56,6 +57,20 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     };
 
+
+
+    let myChart;
     const ctx = document.getElementById('myChart').getContext('2d');
-    new Chart(ctx, config);
+
+
+    function renderChart() {
+        if (myChart) {
+            myChart.destroy(); // Destroy the existing chart instance
+        }
+        myChart = new Chart(ctx, config);
+    }
+
+    renderChart(); // Initial chart render
+
+    window.addEventListener('resize', renderChart);
 });

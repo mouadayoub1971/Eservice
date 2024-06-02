@@ -50,6 +50,17 @@
             {{ __('teachers') }}
         </a>
     </li>
+
+
+    <li class="nav-item">
+        <a class="nav-link " href="{{route('professeur.modules.index')}}">
+            <svg class="nav-icon">
+                <use xlink:href="{{ asset('icons/coreui.svg#cil-zoom') }}"></use>
+            </svg>
+            {{ __('My subjects') }}
+        </a>
+    </li>
+
     <li class="nav-item">
         <a class="nav-link " href="{{route('professeur.scores.index')}}">
             <svg class="nav-icon">
@@ -59,7 +70,7 @@
         </a>
     </li>
 
-    <li class="nav-item">
+   {{-- <li class="nav-item">
         <a class="nav-link {{ request()->is('permissions*') ? 'active' : '' }}"
             href="{{ route('permissions.index') }}">
             <svg class="nav-icon">
@@ -86,5 +97,5 @@
                 </a>
             </li>
         </ul>
-    </li>
+    </li>--}}
 </ul>

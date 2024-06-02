@@ -1,3 +1,4 @@
+{{--
 <ul class="sidebar-nav" data-coreui="navigation" data-simplebar>
     <li class="nav-item">
         <a class="nav-link" href="{{ route('dashboard') }}">
@@ -55,3 +56,4 @@
         </ul>
     </li>
 </ul>
+--}}

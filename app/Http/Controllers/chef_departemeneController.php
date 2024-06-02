@@ -256,7 +256,7 @@ class chef_departemeneController extends Controller
             ]);
     }
 
-    public  function download_TimeTable($classe_id , $filier_id ){
+    public  function download_TimeTable($classe_id ='', $filier_id='' ){
 
 
         $timeTable = DB::table('time_tables')

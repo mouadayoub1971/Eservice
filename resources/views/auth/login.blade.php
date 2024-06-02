@@ -1,6 +1,12 @@
 @extends('layouts.guest')
 
 @section('content')
+
+    <style>
+        .form-control{
+            max-width: 400px;
+        }
+    </style>
     <div class="col-lg-12">
 
 
@@ -20,17 +26,17 @@
                 <div class="card-body ">
 
                     <div class=" col-12  d-flex flex-column align-items-center mb-4 ">
-                        <svg  width="150" height="90" style="color: #505abb " >
-                            <use xlink:href="{{ asset('icons/cMFyTi01.svg#full') }}"></use>
+                        <svg  width="150" height="90" style="color: #505abb "  >
+                            <use xlink:href="{{ asset('icons/cMFyTi01.svg#full') }}" class="text-center"></use>
                         </svg>
                     </div>
-                    <h1 style="color: #505abb; font-weight:bold; ">{{ __('Login') }}</h1>
+                    <h1 style="color: #505abb; font-size: large; text-align: center;margin-bottom: 40px ">{{ __('Plateforme eServices') }}</h1>
 
                     {{--@include('layouts.includes.errors')--}}
 
                     <form action="{{ route('login') }}" method="POST" class="mt-3">
                         @csrf
-                        <div class="input-group mb-3">
+                        <div class="input-group mb-3 justify-content-center">
                             <span class="input-group-text">
                                 <svg class="icon">
                                     <use xlink:href="{{ asset('icons/coreui.svg#cil-envelope-open') }}"></use>
@@ -39,7 +45,7 @@
                             <input class="form-control " type="text"
                                 name="email" placeholder="{{ __('Username') }}" required autofocus>
                         </div>
-                        <div class="input-group mb-4"><span class="input-group-text">
+                        <div class="input-group mb-5 justify-content-center" ><span class="input-group-text">
                                 <svg class="icon">
                                     <use xlink:href="{{ asset('icons/coreui.svg#cil-lock-locked') }}"></use>
                                 </svg></span>

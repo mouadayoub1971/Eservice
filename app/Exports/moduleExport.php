@@ -35,9 +35,7 @@ class moduleExport implements FromArray,WithHeadings
 
             );
 
-
         $module_lists=$this->ModuleServices->getmodules($module_lists ,Auth::user()->filier_id);
-
 
         foreach ($module_lists as $key => $module_list){
 
