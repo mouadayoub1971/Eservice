@@ -58,8 +58,12 @@ class chef_departemeneController extends Controller
         };
 
 
+        foreach ($Filiers as $filier){
+            $new[] = ['id' => $filier->id , 'name'=>$filier->name , 'cordinnateur'=>User::find($filier->cordinateur_id)->name , 'created_at'=>$filier->created_at];
+        }
 
-        return View('chef_departement.filiers.index')->with("name", 'chef_departement')->with('filiers', $Filiers);
+
+        return View('chef_departement.filiers.index')->with("name", 'chef_departement')->with('filiers', $new);
     }
 
     public function create_module($filier_id)

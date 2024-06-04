@@ -2,13 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Module_filier;
+
 use App\Models\Module_prof;
 use App\Models\Role;
-use App\Models\student_score;
+
+use App\Services\ScoresServices;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+
 use Illuminate\Support\Facades\Request as FacadesRequest;
 
 class ProfesseurController extends Controller
@@ -97,27 +99,27 @@ class ProfesseurController extends Controller
 
 
     public function scores_save($module_id , Request $request){
+
         $scores = $request->all();
-        $scores = array_slice($scores, 1, null, true);
+        $scores = array_slice($scores, 1, -1, true);
 
-        foreach ($scores as $student_id => $score){
-            $score_table = student_score::where('student_id' ,$student_id )->where('module_id',$module_id)->get();
 
-            if($score_table->count()==0){
-               $resault=  student_score::create([
-                    'student_id' => $student_id,
-                    'module_id'=>$module_id,
-                    'score'=> $score,
 
-                ]);
+        $ScoresServicese = new ScoresServices();
+
+        if($request->save){
+            $ScoresServicese->save($scores,$module_id);
+        }elseif ($request->validate){
+            foreach ($scores as $student_id => $score){
+                if($score == null){
+                    return redirect()->back()->with('error','all the scores must be filled');
+                }
             }
-            else{
-                $score_table[0]->update([
-                    'score'=> $score
-                ]);
-            }
-
+            $ScoresServicese->validate($scores,$module_id);
         }
+
+
+
 
         return redirect()->back();
 

@@ -5,6 +5,18 @@
 @endsection
 
 @section('content')
+    <style>
+        .btn{
+            background-color:  #3D48AD;
+            color: white;
+        }
+        .btn:hover{
+            color: black;
+            background-color: #626ed7;
+        }
+
+    </style>
+
     <div class="page-wrapper">
         <div class="content container-fluid">
             <div class="page-header">
@@ -20,6 +32,13 @@
 
             <form action="">
                 <div class="student-group-form p-4">
+                    @if(session('error'))
+                        <div class="row ">
+                            <div class="col-lg-12 col-md-12 alert alert-danger text-center">
+                                <p >{{session('error')}}</p>
+                            </div>
+                        </div>
+                    @endif
                     <div class="row">
 
                         <div class="col-lg-3 col-md-6">
@@ -124,8 +143,8 @@
 
                                     </tbody>
                                 </table>
-
-                                            <button type="submit" class="btn btn-outline-success bg-success active m-4"> Save</button>
+                                            <button type="submit" class="btn  m-4" name="save" value="save" > Save</button>
+                                            <button type="submit" class="btn   m-4" name="validate" value="validate" > Validate</button>
 
                                 </form>
 

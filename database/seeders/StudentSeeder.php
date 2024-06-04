@@ -26,7 +26,7 @@ class StudentSeeder extends Seeder
         $Students = [[
 
             'name'              => 'student1 Admin',
-            'email'             => 'student1@admin.com',
+            'email'             => 'elmahdi.haidri@etu.uae.ac.ma',
             'password'          => Hash::make('secret'),
             'role_id' => '1',
             'departement_id' => '1',

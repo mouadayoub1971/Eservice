@@ -98,15 +98,15 @@
                                                     </div>
                                                 </td>
 
-                                                <td class="id">{{ $filier->id }}</td>
+                                                <td class="id">{{ $filier['id'] }}</td>
 
-                                                <td>{{ $filier->name }}</td>
-                                                <td>{{ $filier->cordinateur_id }}</td>
-                                                <td>{{ $filier->created_at }}</td>
+                                                <td>{{ $filier['name'] }}</td>
+                                                <td>{{ $filier['cordinnateur'] }}</td>
+                                                <td>{{ $filier['created_at'] }}</td>
 
                                                 <td class="text-end">
 
-                                                    <a href="{{ Route('chef_departement.filiers.modules', ['id' => $filier->id]) }}"
+                                                    <a href="{{ Route('chef_departement.filiers.modules', ['id' => $filier['id']]) }}"
                                                         class="btn btn-primary text-light  fw-bolder">
                                                         show
                                                     </a>

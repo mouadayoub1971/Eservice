@@ -527,7 +527,7 @@ class UserSeeder extends Seeder
             ],
             [
                 'name' => 'data',
-                'cordinateur_id' => '1',
+                'cordinateur_id' => '8',
                 'departement_id' => '1',
             ]
         ];
