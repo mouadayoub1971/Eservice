@@ -1,7 +1,6 @@
 <style>
-    .profile:hover{
-        box-shadow: 0 7px 18px 0 rgba(0, 0, 0, -0.0), 0 16px 19px 0 rgba(0, 0, 0, 0.10);
-        padding: 2px;
+    .profile:hover .avatar{
+        box-shadow: 0 4px 8px 0 #505abb, 0 6px 20px 0 #505abb;
         transition: .3s;
     }
 </style>
@@ -15,8 +14,8 @@
             </svg>
         </button>
         <a class="header-brand d-md-none" href="#">
-            <svg width="118" height="46" alt="CoreUI Logo">
-                <use xlink:href="{{ asset('icons/brand.svg#full') }}"></use>
+            <svg width="118" height="46" alt="logo">
+                <use xlink:href="{{ asset('icons/cMFyTi01.svg#signet') }}"></use>
             </svg>
         </a>
         <ul class="header-nav ms-auto">
@@ -51,7 +50,8 @@
                     </div>
                 </li>
             </ul>
-            <h5 style="margin: 0">{{Auth::user()->name}}</h5>
+
+            <h5  class="d-none d-md-block" style="margin: 0">{{Auth::user()->name}}</h5>
             </div>
         @endauth
         @if (trim($__env->yieldContent('breadcrumbs')))

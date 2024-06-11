@@ -43,7 +43,6 @@ class LoginController extends Controller
 
     public function getloginpage()
     {
-
         return View('auth.login');
     }
     public function login(Request $request)

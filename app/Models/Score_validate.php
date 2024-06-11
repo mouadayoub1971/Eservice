@@ -11,6 +11,8 @@ class Score_validate extends Model
     protected $fillable = [
         'student_id',
         'module_id',
-        'score',
+        'score_ds',
+        'score_final',
+        'status'
     ];
 }

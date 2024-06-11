@@ -41,6 +41,8 @@
              background-color: #505abb;
              box-shadow: 0 4px 8px 0 #505abb, 0 6px 20px 0 #505abb;
          }
+
+
         .sidebar-brand{
              background :  rgba(0, 0, 0, 0);;
          }
@@ -61,6 +63,13 @@
             color: #232222;
         }
 
+        .btn{
+            background-color: #505abb;
+            color: white;
+        }.btn:hover{
+            color: black;
+
+        }
 
         .nav-group-items .nav-link.active .nav-icon{
             color: #232222;
@@ -77,6 +86,8 @@
         .page-title{
             color : #505abb;
         }
+
+
     </style>
 
 </head>
@@ -92,7 +103,7 @@
             </svg>
         </div>
         @include($name . '.navigation')
-        {{-- @yield('navigation') --}}
+
         <button class="sidebar-toggler" type="button" data-coreui-toggle="unfoldable"></button>
     </div>
     <div class="wrapper d-flex flex-column min-vh-100 ">

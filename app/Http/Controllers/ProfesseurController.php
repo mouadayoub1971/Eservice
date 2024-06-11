@@ -6,6 +6,7 @@ namespace App\Http\Controllers;
 use App\Models\Module_prof;
 use App\Models\Role;
 
+use App\Models\Score_validate;
 use App\Services\ScoresServices;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -76,26 +77,32 @@ class ProfesseurController extends Controller
         $students = [];
         if(!empty(FacadesRequest::get('module'))) {
 
-            $scores_table = DB::table('student_scores')->where('student_scores.module_id' , FacadesRequest::get('module'))
-                ->select('student_scores.student_id','student_scores.score');
+            $scores_table = DB::table('score_validates')->where('score_validates.module_id' , FacadesRequest::get('module'))
+                ->select('score_validates.student_id','score_validates.score_ds','score_validates.score_final','score_validates.status as status');
 
                   $students = DB::table('modules')->where('modules.id', FacadesRequest::get('module'))
                  ->join('module_filiers', 'module_filiers.module_id', 'modules.id')
                     ->join('users', 'users.filier_id', 'module_filiers.filier_id')
-                      ->leftJoinSub( $scores_table, 'student_scores', function ($join) {
-                          $join->on('student_scores.student_id', '=', 'users.id');
+                      ->leftJoinSub( $scores_table, 'score_validates', function ($join) {
+                          $join->on('score_validates.student_id', '=', 'users.id');
                       })
                       ->select(
                           'users.id as id',
                                     'users.name as name',
-                                     'student_scores.score as score'
+                                    'users.avatar as avatar',
+                                     'score_validates.score_ds as score_ds',
+                                     'score_validates.score_final as score_final',
+                                     'score_validates.status as status'
 
                             )->where('users.role_id', '1')
                                        ->get();
 
 
 
+
         }
+
+
 
 
         return view('professeur.scores.index')
@@ -113,13 +120,14 @@ class ProfesseurController extends Controller
 
 
 
+
         $ScoresServicese = new ScoresServices();
 
         if($request->save){
             $ScoresServicese->save($scores,$module_id);
         }elseif ($request->validate){
             foreach ($scores as $student_id => $score){
-                if($score == null){
+                if($score['ds'] == null || $score['final'] == null ){
                     return redirect()->back()->with('error','all the scores must be filled');
                 }
             }

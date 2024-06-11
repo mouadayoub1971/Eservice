@@ -26,7 +26,7 @@ class HomeController extends Controller
         if (Auth::user()->role_id == 2) return view('professeur.home')->with('name', "professeur");
         if (Auth::user()->role_id == 1) return view('student.home')->with('name', "student");
 
-        dd('indefined Role');
+       return redirect()->back();
     }
 
     public function about()

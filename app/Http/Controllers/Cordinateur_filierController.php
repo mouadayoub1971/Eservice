@@ -8,9 +8,11 @@ use App\Models\Departement;
 use App\Models\Filier;
 use App\Models\Module_filier;
 use App\Models\Module_prof;
+use App\Models\Score_validate;
 use App\Models\TimeTable;
 use App\Models\User;
 use App\Services\ModuleServices;
+use App\Services\ScoresServices;
 use App\Services\TimeInterval;
 use App\Services\TimeTableServices;
 use Barryvdh\DomPDF\Facade\Pdf;
@@ -18,6 +20,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
+use Illuminate\Support\Facades\Request as FacadesRequest;
+use Illuminate\View\View;
 use Maatwebsite\Excel\Facades\Excel;
 
 
@@ -228,6 +232,108 @@ public function delete_TimeTable($timetable_id)
 
 }
 
+
+public function filier_scores_index()
+{
+
+    $classes = classe::where('filier_id',Auth::user()->filier_id)->get();
+    return View('cordinnateur_filier.filier_scores.index')
+        ->with('classes',$classes)
+        ->with('name','cordinnateur_filier');
+
+}
+public function filier_scores_modules($classe_id)
+{
+
+
+
+
+    $module_lists = DB::table('modules')
+        ->join('module_filiers', "modules.id", '=', 'module_filiers.module_id')
+        ->where('module_filiers.classe_id',$classe_id)
+        ->join('module_profs', "modules.id", '=', "module_profs.module_id")
+        ->leftJoin('users', "module_profs.prof_id", '=', 'users.id')
+        ->join('classes', 'module_filiers.classe_id', '=', 'classes.id')
+        ->select(
+            'modules.id as id',
+            'modules.name as module',
+            'users.name as prof',
+            'classes.name  as classe',
+            'modules.created_at as created_at',
+            'users.id as prof_id',
+            'module_filiers.filier_id as filier_id',
+            'module_profs.id as module_prof_id'
+        )->get();
+
+
+    foreach ($module_lists as $module){
+
+       $stuatus = Score_validate::where('module_id',$module->id)->first();
+
+       if(empty($stuatus)){
+           $module->status = 0;
+
+       }else
+       $module->status = $stuatus->status;
+
+    }
+
+
+
+    if($module_lists->count() == 0) $this->message = 'no match found';
+
+
+
+
+
+    return View('cordinnateur_filier.filier_scores.validate_module')->with('name','cordinnateur_filier')
+        ->with("module_lists", $module_lists)
+
+        ->with('filier_id',Auth::user()->filier_id)
+        ->with('message', $this->message);
+}
+
+   public function filier_scores($module_id)
+   {
+       $scores_table = DB::table('score_validates')->where('score_validates.module_id' , $module_id)
+           ->select('score_validates.student_id','score_validates.score_ds','score_validates.score_final','score_validates.status as status');
+
+       $students = DB::table('modules')->where('modules.id',$module_id)
+           ->join('module_filiers', 'module_filiers.module_id', 'modules.id')
+           ->join('users', 'users.filier_id', 'module_filiers.filier_id')
+           ->leftJoinSub( $scores_table, 'score_validates', function ($join) {
+               $join->on('score_validates.student_id', '=', 'users.id');
+           })
+           ->select(
+               'users.id as id',
+               'users.name as name',
+               'users.avatar as avatar',
+               'score_validates.score_ds as score_ds',
+               'score_validates.score_final as score_final',
+               'score_validates.status as status'
+
+           )->where('users.role_id', '1')
+           ->get();
+
+       return View('cordinnateur_filier.filier_scores.scores')->with('name','cordinnateur_filier')
+           ->with("students", $students)
+           ->with('module_id',$module_id);
+
+
+   }
+
+   public function filier_scores_send($module_id, Request $request){
+
+       $scores = $request->all();
+
+       $scores = array_slice($scores, 1, -1, true);
+       $ScoresServicese = new ScoresServices();
+       $ScoresServicese->send($scores,$module_id);
+
+       return back();
+
+
+   }
 
 }
 

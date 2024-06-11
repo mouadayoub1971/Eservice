@@ -41,7 +41,7 @@ Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
 
 
 Route::group(['namespace' => 'App\Http\Controllers'], function () {
-    Route::middleware('auth')->group(function () {
+    Route::middleware(['auth','permission'])->group(function () {
         /**
          * Home Routes
          */
@@ -54,6 +54,7 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
         /**
          * chef_departement
          */
+
         Route::group(['prefix' => 'chef_departement/filiers'], function () {
             Route::get('/', [App\Http\Controllers\chef_departemeneController::class, 'index_filier'])->name('chef_departement.filiers.index');
             Route::get('/modules/{id}', [App\Http\Controllers\chef_departemeneController::class, 'show_modules'])->name('chef_departement.filiers.modules');
@@ -80,19 +81,24 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
          * cordinateur_filier
          */
 
-        Route::group(['prefix' => 'cordinateur_filier/modules'], function () {
+        Route::group(['prefix' => 'cordinnateur_filier/modules'], function () {
             Route::get('/', [App\Http\Controllers\Cordinateur_filierController::class, 'index_module'])->name('cordinateur_filier.Module.index');
             Route::post('/', [App\Http\Controllers\Cordinateur_filierController::class, 'index_module'])->name('cordinateur_filier.Module.index');
             Route::post('/save', [App\Http\Controllers\Cordinateur_filierController::class, 'save_module'])->name('cordinateur_filier.Module.save');
             Route::get('/download', [App\Http\Controllers\Cordinateur_filierController::class, 'download_module'])->name('cordinateur_filier.Module.download');
-
         });
-        Route::group(['prefix' => 'cordinateur_filier/TimeTable'], function () {
+        Route::group(['prefix' => 'cordinnateur_filier/TimeTable'], function () {
             Route::get('/{classe?}', [App\Http\Controllers\Cordinateur_filierController::class, 'index_TimeTable'])->name('cordinateur_filier.TimeTable.index');
             Route::post('/{classe?}', [App\Http\Controllers\Cordinateur_filierController::class, 'edit_TimeTable'])->name('cordinateur_filier.TimeTable.edit');
             Route::get('/{timetable_id?}/delete', [App\Http\Controllers\Cordinateur_filierController::class, 'delete_TimeTable'])->name('cordinateur_filier.TimeTable.delete');
             Route::get('/download/{classe?}', [App\Http\Controllers\Cordinateur_filierController::class, 'download_TimeTable'])->name('cordinateur_filier.TimeTable.download');
 
+        });
+        Route::group(['prefix' => 'cordinnateur_filier/scores/filier'], function () {
+            Route::get('/classes', [App\Http\Controllers\Cordinateur_filierController::class, 'filier_scores_index'])->name('cordinnateur_filier.scores.index');
+            Route::get('/modules/{classe_id}', [App\Http\Controllers\Cordinateur_filierController::class, 'filier_scores_modules'])->name('cordinnateur_filier.scores.validate_module');
+            Route::get('/scores/{module_id}', [App\Http\Controllers\Cordinateur_filierController::class, 'filier_scores'])->name('cordinnateur_filier.scores');
+            Route::post('/scores/{module_id}', [App\Http\Controllers\Cordinateur_filierController::class, 'filier_scores_send'])->name('cordinnateur_filier.scores.send');
         });
 
 
@@ -105,11 +111,13 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
             Route::get('/', [App\Http\Controllers\ProfesseurController::class, 'modules_index'])->name('professeur.modules.index');
 
         });
-        Route::group(['prefix' => 'professeur/Scores'], function () {
+
+
+        Route::group(['prefix' => 'professeur/scores/myclasses'], function () {
             Route::get('/', [App\Http\Controllers\ProfesseurController::class, 'scores_index'])->name('professeur.scores.index');
             Route::post('/save/{module_id?}', [App\Http\Controllers\ProfesseurController::class, 'scores_save'])->name('professeur.scores.save');
-
         });
+
 
 
         /**

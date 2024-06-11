@@ -15,10 +15,13 @@ return new class extends Migration
             $table->id();
             $table->bigInteger('student_id',false,true);
             $table->bigInteger('module_id',false,true);
-            $table->float('score')->nullable();
+            $table->float('score_ds')->nullable();
+            $table->float('score_final')->nullable();
+            $table->bigInteger('status')->default(0);
             $table->timestamps();
             $table->foreign('module_id')->references('id')->on('modules');
             $table->foreign('student_id')->references('id')->on('users');
+
         });
     }
 

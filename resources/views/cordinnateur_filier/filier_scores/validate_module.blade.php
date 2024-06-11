@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('title')
-    Student Scores
+    Modules
 @endsection
 
 @section('content')
@@ -11,7 +11,7 @@
                 <div class="row">
                     <div class="col-sm-12">
                         <div class="page-sub-header">
-                            <h3 class="page-title">Student Scores</h3>
+                            <h3 class="page-title">Modules status</h3>
 
                         </div>
                     </div>
@@ -28,12 +28,7 @@
                                     <div class="col">
                                         <h3 class="page-title">Modules</h3>
                                     </div>
-                                    <div class="col-auto text-end float-end ms-auto download-grp">
 
-                                        <a href="{{--{{Route('cordinateur_filier.Module.download',['classe'=>Request::get('classe')])}}--}}" class="btn btn-outline-primary me-2"><i
-                                                class="fas fa-download"></i> Download</a>
-
-                                    </div>
                                 </div>
                             </div>
 
@@ -50,9 +45,9 @@
                                             </th>
                                             <th>ID</th>
                                             <th>Name</th>
-                                            <th>ds</th>
-                                            <th>final</th>
-
+                                            <th>Professeur</th>
+                                            <th>classe</th>
+                                            <th>status</th>
 
                                         </tr>
                                     </thead>
@@ -61,7 +56,7 @@
 
 
 
-                                        @foreach ($scores as $key => $score)
+                                        @foreach ($module_lists as $key => $module_list)
                                             <tr class=" fw-bolder">
 
                                                 <td>
@@ -70,16 +65,21 @@
                                                     </div>
                                                 </td>
 
-                                                <td class="id">{{ $score->id }}</td>
+                                                <td class="id">{{ $module_list->id }}</td>
 
-                                                <td>{{ $score->name }}</td>
+                                                <td>{{ $module_list->module }}</td>
                                                 <td>
-                                                    <input type="number" max = 20 disabled class="text-center"  value="{{$score->score_ds}}">
+
+                                                     {{ $module_list->prof}}
 
                                                 </td>
-                                                <td>
+                                                <td>{{ $module_list->classe }}</td>
+                                                <td>@if($module_list->status)
+                                                        <button class='btn bg-success'><a href="{{Route("cordinnateur_filier.scores",['module_id'=>$module_list->id])}}"> show</a> </button>
+                                                    @else
+                                                        <button class='btn bg-grey' disabled>pending..</button>
 
-                                                    <input type="number" max = 20 disabled class="text-center"  value="{{$score->score_final}}">
+                                                @endif
                                                 </td>
 
                                             </tr>
@@ -91,6 +91,7 @@
 
                                     </tbody>
                                 </table>
+
 
                             </div>
                         </div>

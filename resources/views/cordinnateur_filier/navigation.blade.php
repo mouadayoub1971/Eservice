@@ -38,13 +38,36 @@
         </a>
     </li>
 
-    <li class="nav-item">
-        <a class="nav-link " href="{{route('professeur.scores.index')}}">
+
+
+
+    <li class="nav-group" aria-expanded="true">
+        <a class="nav-link nav-group-toggle" >
             <svg class="nav-icon">
-                <use xlink:href="{{ asset('icons/coreui.svg#cil-zoom') }}"></use>
+                <use xlink:href="{{ asset('icons/coreui.svg#cil-star') }}"></use>
             </svg>
-            {{ __('scores') }}
+            scores
         </a>
+        <ul class="nav-group-items">
+            <li class="nav-item">
+                <a class="nav-link " href="{{route('professeur.scores.index')}}">
+                    <svg class="nav-icon">
+                        <use xlink:href="{{ asset('icons/coreui.svg#cil-zoom') }}"></use>
+                    </svg>
+                    {{ __('My scores') }}
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link"
+                   href="{{ route('cordinnateur_filier.scores.index')}}" target="_top"  >
+
+                    <div class="nav-icon p-0"  style="margin-top: -10px">
+                        <i class="fa-solid fa-id-card"></i>
+                    </div>
+                    {{ __('Filier') }}
+                </a>
+            </li>
+        </ul>
     </li>
 
 </ul>

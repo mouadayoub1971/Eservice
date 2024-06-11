@@ -66,8 +66,6 @@ class ProfileController extends Controller
     public  function Profile_save($id , Request $request ){
 
         $request->validate([
-            'name' => 'required',
-            'email'=>'required|email',
             'image'=>'required|image'
         ]);
 

@@ -37,9 +37,6 @@ Profile
                                 <div class="mt-3">
                                     <h4>{{$name}}</h4>
                                     <p class="text-secondary mb-1"></p>
-                                    <p class="text-muted font-size-sm">Bay Area, San Francisco, CA</p>
-                                    <button class="btn btn-primary">Follow</button>
-                                    <button class="btn btn-outline-primary">Message</button>
                                 </div>
                             </div>
 
@@ -57,7 +54,7 @@ Profile
                                     <h6 class="mb-0">Full Name</h6>
                                 </div>
                                 <div class="col-sm-9 text-secondary">
-                                    <input name="name" type="text" class="form-control" value="{{$user['name']}}">
+                                    <input name="name" type="text" readonly class="form-control" value="{{$user['name']}}">
                                 </div>
                             </div>
                             <div class="row mb-3">
@@ -65,7 +62,7 @@ Profile
                                     <h6 class="mb-0">Email</h6>
                                 </div>
                                 <div class="col-sm-9 text-secondary">
-                                    <input name="email" type="text" class="form-control" value="{{$user['email']}}">
+                                    <input name="email"  readonly type="text" class="form-control" value="{{$user['email']}}">
                                 </div>
                             </div>
                             <div class="row mb-3">

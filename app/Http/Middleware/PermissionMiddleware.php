@@ -4,6 +4,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Spatie\Permission\Exceptions\UnauthorizedException;
 
 class PermissionMiddleware
@@ -15,33 +16,30 @@ class PermissionMiddleware
      * @param  \Closure  $next
      * @return mixed
      */
-    public function handle($request, Closure $next, $permission = null, $guard = null)
+    public function handle($request, Closure $next)
     {
-        $authGuard = app('auth')->guard($guard);
 
-        if ($authGuard->guest()) {
-            throw UnauthorizedException::notLoggedIn();
+        if(request()->is("cordinnateur_filier*") && Auth::user()->role_id==4) {
+
+            return $next($request);
+        }
+        if(request()->is("chef_departement*") && Auth::user()->role_id==3) {
+
+            return $next($request);
+        }
+        if(request()->is("professeur*") && Auth::user()->role_id!=1) {
+
+            return $next($request);
+        }
+        if(request()->is("student*") && Auth::user()->role_id==1) {
+
+            return $next($request);
+        }
+        if(request()->is("dashboard*") || request()->is("profile*") ) {
+
+            return $next($request);
         }
 
-        if (! is_null($permission)) {
-            $permissions = is_array($permission)
-                ? $permission
-                : explode('|', $permission);
-        }
-
-        if ( is_null($permission) ) {
-            $permission = $request->route()->getName();
-
-            $permissions = array($permission);
-        }
-        
-
-        foreach ($permissions as $permission) {
-            if ($authGuard->user()->can($permission)) {
-                return $next($request);
-            }
-        }
-
-        throw UnauthorizedException::forPermissions($permissions);
+        return redirect()->back();
     }
 }

@@ -59,12 +59,13 @@ class StudentController extends Controller
 
 
         $scores = DB::table('modules')
-            ->join('student_scores','student_scores.module_id','modules.id')
-            ->where('student_scores.student_id',Auth::user()->id)
+            ->join('score_validates','score_validates.module_id','modules.id')
+            ->where('score_validates.student_id',Auth::user()->id)->where('score_validates.status',2)
             ->select(
                 'modules.id as id',
                 'modules.name as name',
-                'student_scores.score as score'
+                'score_validates.score_ds as score_ds',
+                'score_validates.score_final as score_final'
             )->get();
 
         return View('student.scores.index')->with('name','student')

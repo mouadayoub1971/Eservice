@@ -51,44 +51,7 @@
                 </div>
             </div>
 
-            <form action="">
-                <div class="student-group-form p-4">
-                    @if(session('error'))
-                        <div class="row ">
-                            <div class="col-lg-12 col-md-12 alert alert-danger text-center">
-                                <p >{{session('error')}}</p>
-                            </div>
-                        </div>
-                    @endif
-                    <div class="row">
 
-                        <div class="col-lg-3 col-md-6">
-
-                            <div class="form-group">
-                                <select class="form-control" id="exampleFormControlSelect1" name="module"  >
-                                    @if (!empty(Request::get('module')))
-                                        <option value="">shose module ...</option>
-                                        <option selected hidden>{{ Request::get('module') }}</option>
-                                    @else
-                                        <option selected  value="">shose module ...</option>
-                                    @endif
-                                    @foreach ($modules as $key => $module)
-                                        <option value="{{ $module->id }}">{{ $module->module_name }}</option>
-
-                                    @endforeach
-                                </select>
-                            </div>
-
-
-                        </div>
-                        <div class="col-lg-2">
-                            <div class="search-student-btn">
-                                <button type="submit" class="btn btn-primary">Search</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </form>
             <div class="row">
                 <div class="col-sm-12">
                     <div class="card card-table comman-shadow">
@@ -100,18 +63,12 @@
                                     </div>
                                     <div class="col-auto text-end float-end ms-auto download-grp">
 
-
-                                        <a href="{{--{{Route('cordinateur_filier.Module.download',['classe'=>Request::get('classe')])}}--}}" class="btn btn-outline-primary me-2"><i
-                                                class="fas fa-download"></i> Download</a>
-
-
-
                                     </div>
                                 </div>
                             </div>
 
                             <div class="table-responsive">
-                                <form action="{{Route("professeur.scores.save" , ['module_id'=>Request::get('module') ])}}"  method="POST">
+                                <form action="{{Route("cordinnateur_filier.scores.send" , ['module_id'=>$module_id ])}}"  method="POST">
                                     @csrf
                                 <table
                                     class="table border-0 star-student table-hover table-center mb-0 datatable table-striped">
@@ -149,11 +106,11 @@
                                                 <td class="name_img"  ><div style="width: 45px ;height: 100% ;display: inline-block ;vertical-align: center" class="mx-2 img avatar-img"><img id= 'closed'src="{{url($student->avatar)}}" class="avatar-img" ></div> <p class="d-inline-block m-0">{{ $student->name }}</p></td>
                                                 <td>
 
-                                                    <input type="number" max = 20  {{ $student->status != 0 ? "disabled" : ''}}  name="{{$student->id}}[ds]" value="{{$student->score_ds}}">
+                                                    <input type="number"   readonly name="{{$student->id}}[ds]" value="{{$student->score_ds}}"/>
                                                 </td>
                                                 <td>
 
-                                                    <input type="number" max = 20  {{ $student->status != 0 ? "disabled" : ''}}  name="{{$student->id}}[final]" value="{{$student->score_final}}">
+                                                    <input type="number"  readonly  name="{{$student->id}}[final]" value="{{$student->score_final}}"/>
                                                 </td>
 
                                             </tr>
@@ -162,13 +119,15 @@
 
 
 
-
                                     </tbody>
                                 </table>
-                                    @if( !empty($student) && $students[0]->status == 0)
 
-                                        <button type="submit" class="btn  m-4" name="save" value="save" > Save</button>
-                                        <button type="submit" class="btn   m-4" name="validate" value="validate" >Validate</button>
+
+
+                                    @if( !empty($student) && $students[0]->status == 1)
+
+                                        <button type="submit" class="btn   m-4" name="send" value="send" >send</button>
+
                                     @endif
 
 
