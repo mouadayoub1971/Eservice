@@ -181,7 +181,7 @@ class chef_departemeneController extends Controller
         $departement_name = Departement::find($AuthenticateCurrentUser)->name;
         $profs = User::where('departement_id', $AuthenticateCurrentUser)->whereIn('role_id', ["2","3","4"])->get();
         $profDoesntHaveDepartement = User::whereNull('departement_id')
-        ->where('role_id', 2)->get();
+        ->whereIn('role_id', ["2","3","4"])->get();
         return View('chef_departement.profs.index', ['profs'=>$profs , 'departementName'=>$departement_name, 'otherProfs'=>$profDoesntHaveDepartement])->with("name", 'chef_departement');
     }
     public function profDestroy($profId){
@@ -192,16 +192,24 @@ class chef_departemeneController extends Controller
             }
             return redirect()->route('chef_departemenet.profs.index');
     }
-    public function profStore() {
-        $data = request()->all();
-        //$profId = $data[chosenId];
-        $profId = request()->chosenId;
-        $departement = auth::user()->departement_id;
+    public function profStore()
+    {
+
+    $profId = request()->chosenId;
+    $departement = auth::user()->departement_id;
+
+    if ($profId !== null) {
         $prof = User::find($profId);
         $prof->departement_id = $departement;
         $prof->save();
-        return redirect()->route('chef_departemenet.profs.index');
+    } else {
+        // Handle the case where departement_id is null
+        // You can either return an error message or take appropriate action
+        return redirect()->back()->withErrors(['departement_id' =>"Vous n'avez sélectionné aucun professeur"]);
     }
+
+    return redirect()->route('chef_departemenet.profs.index');
+  }
 
     public  function Profile_Index($id){
 

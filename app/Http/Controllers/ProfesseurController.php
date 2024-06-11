@@ -28,7 +28,7 @@ class ProfesseurController extends Controller
     $moduleEnSignes = Module_prof::where('prof_id', auth()->user()->id)
     ->join('modules', 'module_profs.module_id', '=', 'modules.id')
     ->join('module_filiers', 'module_profs.module_id', '=', 'module_filiers.module_id')
-    ->join('time_tables', 'module_filiers.id', '=', 'time_tables.module_filier_id')
+    ->leftJoin('time_tables', 'module_filiers.id', '=', 'time_tables.module_filier_id')
     ->join('classes', 'classes.id', '=', 'module_filiers.classe_id')
     ->join('filiers', 'filiers.id', '=', 'module_filiers.filier_id')
     ->join('departements', 'departements.id', '=', 'filiers.departement_id')
@@ -52,6 +52,14 @@ class ProfesseurController extends Controller
     )
     ->orderByRaw('FIELD(UPPER(time_tables.day), "MONDAY", "TUESDAY", "WEDNESDAY", "THURSDAY", "FRIDAY", "SATURDAY", "SUNDAY")')
     ->get();
+    // $moduleEnSignes = Module_prof::where('prof_id', auth()->user()->id)
+    // ->join('modules', 'module_profs.module_id', '=', 'modules.id')
+    // ->join()
+    // ->select(
+    //     'modules.*'
+    // )
+    // ->get();
+    // dd($moduleEnSignes);
         return view('professeur.modules.index')->with('modules', $moduleEnSignes)->with('name', $this->getRole()->name);
     }
 
