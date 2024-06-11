@@ -48,10 +48,10 @@
               <td>{{ $prof->name}}</td>
               <td>
              <h2 class="table-avatar">
-                 <a href="student-details.html" class="avatar avatar-sm me-2">
+
                      <img class="avatar-img rounded-circle" style="width: 3rem" src="{{url($prof->avatar)}}" alt="User Image">
-                 </a>
-                 <a href="student-details.html"></a>
+
+
              </h2>
          </td>
               <td>{{$prof->email}}</td>

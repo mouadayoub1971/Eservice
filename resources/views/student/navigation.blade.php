@@ -4,9 +4,9 @@
 <ul class="sidebar-nav" data-coreui="navigation" data-simplebar>
     <li class="nav-item">
         <a class="nav-link" href="{{ route('dashboard') }}">
-            <svg class="nav-icon">
-                <use xlink:href="{{ asset('icons/coreui.svg#cil-speedometer') }}"></use>
-            </svg>
+            <div class="nav-icon"  style="margin-top: -10px">
+                <i class="fa-solid fa-chart-line"></i>
+            </div>
             {{ __('Dashboard') }}
         </a>
     </li>
